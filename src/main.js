@@ -23,7 +23,7 @@ import {
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
-  LayoutPlugin, 
+  LayoutPlugin,
   InputGroupPlugin
 } from "bootstrap-vue";
 [
@@ -36,17 +36,17 @@ import {
   FormSelectPlugin,
   AlertPlugin,
   ToastPlugin,
-  LayoutPlugin, 
+  LayoutPlugin,
   InputGroupPlugin
 ].forEach((x) => Vue.use(x));
 Vue.use(Vuelidate);
 
 axios.interceptors.request.use(
-  function(config) {
+  function (config) {
     // Do something before request is sent
     return config;
   },
-  function(error) {
+  function (error) {
     // Do something with request error
     return Promise.reject(error);
   }
@@ -54,11 +54,11 @@ axios.interceptors.request.use(
 
 // Add a response interceptor
 axios.interceptors.response.use(
-  function(response) {
+  function (response) {
     // Do something with response data
     return response;
   },
-  function(error) {
+  function (error) {
     // Do something with response error
     return Promise.reject(error);
   }
@@ -69,8 +69,10 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 
 const shared_data = {
-  // username: localStorage.username,
-  username: "hilla",
+  username: localStorage.username,
+  server_domain: "localhost:",
+  port: 8080,
+  // username: "guest",
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;

@@ -3,7 +3,10 @@
     <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
+        <b-nav-item :to="{ name: 'main' }">Home</b-nav-item>
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
+        <b-nav-item :to="{ name: 'search' }">Current Stage</b-nav-item>
+        <b-nav-item :to="{ name: 'search' }">About</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
         <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
