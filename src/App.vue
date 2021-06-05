@@ -1,34 +1,17 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-
-        <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
-          <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
-          <b-nav-item :to="{ name: 'register' }">Register</b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto" v-else>
-        <b-nav-item-dropdown right>
-          <template #button-content>
-            User
-          </template>
-          <b-dropdown-item href="#">Favorites</b-dropdown-item>
-          <b-dropdown-item href="#">Log Out</b-dropdown-item>
-        </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+    <Navbar></Navbar>
     <router-view />
   </div>
 </template>
 
 <script>
+import Navbar from "./components/Navbar.vue";
 export default {
   name: "App",
+  components: {
+    Navbar,
+  },
   methods: {
     Logout() {
       this.$root.store.logout();
@@ -37,12 +20,12 @@ export default {
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
-  }
+    },
+  },
 };
 </script>
-
-<style lang="scss">
+<style>
+/* <style lang="scss">
 @import "@/scss/form-style.scss";
 
 #app {
@@ -64,5 +47,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>

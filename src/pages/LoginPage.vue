@@ -39,7 +39,7 @@
       <b-button
         type="submit"
         variant="primary"
-        style="width:100px;display:block;"
+        style="width: 100px; display: block"
         class="mx-auto w-100"
         >Login</b-button
       >
@@ -72,19 +72,19 @@ export default {
       form: {
         username: "",
         password: "",
-        submitError: undefined
-      }
+        submitError: undefined,
+      },
     };
   },
   validations: {
     form: {
       username: {
-        required, 
+        required,
       },
       password: {
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
     validateState(param) {
@@ -97,7 +97,7 @@ export default {
           "https://localhost:3000/user/Login",
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
           }
         );
         // console.log(response);
@@ -120,12 +120,13 @@ export default {
       // console.log("login method go");
 
       this.Login();
-    }
-  }
+    },
+  },
 };
 </script>
-<style lang="scss" scoped>
+<style>
+/* <style lang="scss" scoped>
 .container {
   max-width: 400px;
-}
+} */
 </style>
