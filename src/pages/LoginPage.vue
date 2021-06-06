@@ -125,8 +125,7 @@ export default {
 };
 </script>
 <style>
-/* <style lang="scss" scoped>
 .container {
   max-width: 400px;
-} */
+}
 </style>

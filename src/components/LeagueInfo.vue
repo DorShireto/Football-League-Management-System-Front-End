@@ -1,13 +1,21 @@
 <template>
   <div class="league-preview">
-    <b-card img-alt="Image" tag="article" style="max-width: 20rem" class="mb-2">
+    <b-card img-alt="Image" tag="article" style="max-width: 25rem" class="">
       <b-card-title>{{ leagueName }}</b-card-title>
       <b-card-text>
-        Season: {{ season }}
+        <b>Season:</b> {{ season }}
         <br />
-        Stage: {{ stage }}
+        <b>Stage:</b> {{ stage }}
+        <br />
+        <div v-if="stage != 'currently there i s no stage available'">
+          <b>Next Match Details:</b> <br />
+          <u>Date:</u> {{ nextMatch.date }}<br />
+          <u>Time:</u> {{ nextMatch.time }}<br />
+          <u> Home Team:</u> {{ nextMatch.homeTeam }}<br />
+          <u>Away Team:</u> {{ nextMatch.awayTeam }}<br />
+          <u>Stadium:</u> {{ nextMatch.stadium }}<br />
+        </div>
       </b-card-text>
-      <b-button href="#" variant="primary">Go somewhere</b-button>
     </b-card>
   </div>
 </template>
@@ -19,6 +27,7 @@ export default {
       leagueName: "Superliga",
       season: "season",
       stage: "stage",
+      nextMatch: {},
     };
   },
   async mounted() {
@@ -30,6 +39,7 @@ export default {
     this.leagueName = response.data.leagueName;
     this.season = response.data.seasonName;
     this.stage = response.data.stageName;
+    this.nextMatch = response.data.nextMatch;
   },
 };
 </script>
@@ -37,14 +47,14 @@ export default {
 <style>
 .league-preview {
   display: inline-block;
-  width: 250px;
-  height: 200px;
+  /* width: 250px; */
+  /* height: 200px; */
   position: relative;
   margin: 10px 10px;
   border-style: solid;
   border-radius: 10px;
   border-width: 5px;
-  border-color: rgb(44, 89, 116);
+  border-color: rgb(0, 0, 0);
 }
 
 .league-preview .league-title {

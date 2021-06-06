@@ -2,9 +2,16 @@
   <div id="mainPage">
     <div class="container">
       <h1 class="title">Main Page</h1>
-      <LoginPage v-if="!$root.store.username"></LoginPage>
-      <FavoriteGames v-else></FavoriteGames>
-      <LeagueInfo></LeagueInfo>
+      <div class="row">
+        <div class="col"><LeagueInfo></LeagueInfo></div>
+        <div class="col-6">
+          <LoginPage
+            class="float-right"
+            v-if="!$root.store.username"
+          ></LoginPage>
+          <FavoriteGames v-else></FavoriteGames>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +36,11 @@ export default {
   background-repeat: no-repeat;
   /* background-size: auto; */
   background-size: cover;
+  height: 100vh;
+}
+
+h1 {
+  color: aliceblue;
 }
 /* <style lang="scss" scoped>
 .RandomRecipes {
