@@ -1,9 +1,11 @@
 <template>
-  <div class="container">
-    <h1 class="title">Main Page</h1>
-    <LoginPage v-if="!$root.store.username"></LoginPage>
-    <FavoriteGames v-else></FavoriteGames>
-    <LeagueInfo></LeagueInfo>
+  <div id="mainPage">
+    <div class="container">
+      <h1 class="title">Main Page</h1>
+      <LoginPage v-if="!$root.store.username"></LoginPage>
+      <FavoriteGames v-else></FavoriteGames>
+      <LeagueInfo></LeagueInfo>
+    </div>
   </div>
 </template>
 
@@ -22,6 +24,12 @@ export default {
 
 
 <style>
+#mainPage {
+  background-image: url("C:/Users/liors/Desktop/BGU/year3/semester6/webDev/hw/hw3.3/assignment-3-3-311327084_312204811/public/imgs/mainpageBG.jpg");
+  background-repeat: no-repeat;
+  /* background-size: auto; */
+  background-size: cover;
+}
 /* <style lang="scss" scoped>
 .RandomRecipes {
   margin: 10px 0 10px;

@@ -1,3 +1,6 @@
+
+
+
 import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
@@ -68,10 +71,17 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
+// const state = Vue.observable(store_state)
+// const actions = Vue.observable(store_actions)
+// const store = { state: state, actions: actions }
+
+
+// Vue.prototype.$store = store;
+
 const shared_data = {
   username: localStorage.username,
-  server_domain: "localhost:",
-  port: 8080,
+  server_domain: "http://localhost:",
+  server_port: 3000,
   // username: "guest",
   login(username) {
     localStorage.setItem("username", username);
@@ -84,8 +94,9 @@ const shared_data = {
     this.username = undefined;
   }
 };
-console.log(shared_data);
+// console.log(shared_data);
 // Vue.prototype.$root.store = shared_data;
+
 
 new Vue({
   router,

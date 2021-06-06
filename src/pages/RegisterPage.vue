@@ -22,8 +22,46 @@
         </b-form-invalid-feedback>
         <b-form-invalid-feedback v-if="!$v.form.username.alpha">
           Username alpha
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- username -->
+
+      <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="First Name:"
+        label-for="firstName"
+      >
+        <b-form-input
+          id="firstName"
+          v-model="$v.form.firstName.$model"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          First name is required
         </b-form-invalid-feedback>
-      </b-form-group>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.alpha">
+          First Name should contain letters only!
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- first name -->
+
+      <b-form-group
+        id="input-group-lastName"
+        label-cols-sm="3"
+        label="Last Name:"
+        label-for="lastName"
+      >
+        <b-form-input
+          id="lastName"
+          v-model="$v.form.lastName.$model"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          Last name is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.alpha">
+          Lirst Name should contain letters only!
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- last name -->
 
       <b-form-group
         id="input-group-country"
@@ -37,8 +75,10 @@
           :options="countries"
           :state="validateState('country')"
         ></b-form-select>
-        <b-form-invalid-feedback> Country is required </b-form-invalid-feedback>
-      </b-form-group>
+        <b-form-invalid-feedback>
+          Country is required
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- country -->
 
       <b-form-group
         id="input-group-Password"
@@ -63,8 +103,8 @@
           v-if="$v.form.password.required && !$v.form.password.length"
         >
           Have length between 5-10 characters long
-        </b-form-invalid-feedback>
-      </b-form-group>
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- password -->
 
       <b-form-group
         id="input-group-confirmedPassword"
@@ -85,8 +125,56 @@
           v-else-if="!$v.form.confirmedPassword.sameAsPassword"
         >
           The confirmed password is not equal to the original password
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- confirmed password -->
+
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          email is required
         </b-form-invalid-feedback>
-      </b-form-group>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.email">
+          invalid Email!
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- email -->
+
+      <!-- <b-form-group
+        id="input-group-profilePic"
+        label-cols-sm="3"
+        label="Profile Picture URL:"
+        label-for="profilePic"
+      >
+        <b-form-input
+          id="profilePic"
+          v-model="$v.form.profilePic.$model"
+        ></b-form-input></b-form-group
+      >profile picture -->
+
+      <b-form-group
+        id="input-group-role"
+        label-cols-sm="3"
+        label="Role:"
+        label-for="role"
+      >
+        <b-form-select
+          id="role"
+          v-model="$v.form.role.$model"
+          :options="roles"
+          :state="validateState('role')"
+        ></b-form-select>
+        <b-form-invalid-feedback>
+          Role is required
+        </b-form-invalid-feedback> </b-form-group
+      ><!-- role -->
 
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
@@ -140,9 +228,12 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
+        // profilePic: "",
+        role: null,
         submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
+      roles: [{ value: null, text: "", disabled: true }],
       errors: [],
       validated: false,
     };
@@ -157,6 +248,14 @@ export default {
       country: {
         required,
       },
+      firstName: {
+        required,
+        alpha,
+      },
+      lastName: {
+        required,
+        alpha,
+      },
       password: {
         required,
         length: (p) => minLength(5)(p) && maxLength(10)(p),
@@ -165,11 +264,19 @@ export default {
         required,
         sameAsPassword: sameAs("password"),
       },
+      email: {
+        required,
+        email,
+      },
+      role: {
+        required,
+      },
     },
   },
   mounted() {
     // console.log("mounted");
     this.countries.push(...countries);
+    this.roles.push("Fan", "Association Member", "Manager", "Player", "Coach");
     // console.log($v);
   },
   methods: {
@@ -178,16 +285,33 @@ export default {
       return $dirty ? !$error : null;
     },
     async Register() {
+      // alert(this.$store.state.server_domain);
+
       try {
-        const response = await this.axios.post(BUG server_url + "/Register", {
-          username: this.form.username,
-          password: this.form.password,
-        });
+        if (this.form.role == "Association Member")
+          this.form.role = "asso_member";
+        const response = await this.axios.post(
+          // $root.store.server_domain + $root.store.server_port + "/Register",
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/Register",
+          {
+            username: this.form.username,
+            firstName: this.form.firstName,
+            lastName: this.form.lastName,
+            country: this.form.country,
+            password: this.form.password,
+            email: this.form.email,
+            profilePic: "",
+            // profilePic: this.form.profilePic,
+            role: this.form.role.toLowerCase(),
+          }
+        );
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {
         console.log(err.response);
-        this.form.submitError = err.response.data.message;
+        this.form.submitError = err.response.data;
       }
     },
     onRegister() {
@@ -208,6 +332,8 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
+        profilePic: "",
+        role: null,
       };
       this.$nextTick(() => {
         this.$v.$reset();
