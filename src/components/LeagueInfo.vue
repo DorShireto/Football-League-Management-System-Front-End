@@ -7,7 +7,7 @@
         <br />
         <b>Stage:</b> {{ stage }}
         <br />
-        <div v-if="stage != 'currently there i s no stage available'">
+        <div v-if="stage != 'currently there is no stage available'">
           <b>Next Match Details:</b> <br />
           <u>Date:</u> {{ nextMatch.date }}<br />
           <u>Time:</u> {{ nextMatch.time }}<br />
