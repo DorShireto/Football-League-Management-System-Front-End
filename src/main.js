@@ -5,7 +5,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
-
 import routes from "./routes";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
@@ -66,17 +65,9 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
+axios.defaults.withCradentials = true;
 Vue.use(VueAxios, axios);
-
 Vue.config.productionTip = false;
-
-// const state = Vue.observable(store_state)
-// const actions = Vue.observable(store_actions)
-// const store = { state: state, actions: actions }
-
-
-// Vue.prototype.$store = store;
 
 const shared_data = {
   username: localStorage.username,

@@ -47,7 +47,8 @@ export default {
         const response = await this.axios.get(
           this.$root.store.server_domain +
             this.$root.store.server_port +
-            "/users/favoriteMatches"
+            "/users/favoriteMatches",
+          { withCredentials: true }
         );
         console.log(response);
         const games = response.data;

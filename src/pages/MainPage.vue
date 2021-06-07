@@ -2,6 +2,11 @@
   <div id="mainPage">
     <div class="container">
       <h1 class="title">Main Page</h1>
+      <PlayerPreview
+        fullName="lior"
+        activeTeam="test"
+        position="1"
+      ></PlayerPreview>
       <div class="row">
         <div class="col"><LeagueInfo></LeagueInfo></div>
         <div class="col-6">
@@ -20,11 +25,13 @@
 import LeagueInfo from "../components/LeagueInfo";
 import FavoriteGames from "../components/FavoriteGames";
 import LoginPage from "../pages/LoginPage";
+import PlayerPreview from "../components/PlayerPreview";
 export default {
   components: {
     LeagueInfo,
     LoginPage,
     FavoriteGames,
+    PlayerPreview,
   },
 };
 </script>
