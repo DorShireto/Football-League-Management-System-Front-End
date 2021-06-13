@@ -7,25 +7,24 @@
         <b-button variant="success">Search</b-button>
       </b-input-group-append>
     </b-input-group>
-      <br/>
-      Your search Query: {{ searchQuery }}
+    <br />
+    Your search Query: {{ searchQuery }}
   </div>
 </template>
 
 <script>
 export default {
- data() {
+  data() {
     return {
-      searchQuery:""
+      searchQuery: "",
     };
   },
-}
+};
 </script>
 
 <style scoped>
-
 #search-input {
-  margin-left: 20px; 
-  width: 500px; 
+  margin-left: 20px;
+  width: 500px;
 }
 </style>

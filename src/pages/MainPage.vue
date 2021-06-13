@@ -3,9 +3,10 @@
     <div class="container">
       <h1 class="title">Main Page</h1>
       <PlayerPreview
-        fullName="lior"
-        activeTeam="test"
-        position="1"
+        fullName="jhon something"
+        activeTeam="celtic"
+        position="3"
+        id="172104"
       ></PlayerPreview>
       <div class="row">
         <div class="col"><LeagueInfo></LeagueInfo></div>

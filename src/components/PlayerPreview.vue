@@ -1,12 +1,23 @@
 <template>
   <div class="player-preview">
-    <b-card img-alt="Image" tag="article" style="max-width: 25rem" class="">
+    <b-card
+      id="playerCard"
+      img-alt="Image"
+      tag="article"
+      style="max-width: 25rem"
+      class=""
+    >
       <b-card-title>{{ fullName }}</b-card-title>
       <b-card-text>
         <b>Team:</b> {{ activeTeam }}
         <br />
         <b>Position:</b> {{ position }}
+        <br />
+        <b>Profilepic:</b> {{ profilePicURL }}
       </b-card-text>
+      <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
+        >Personal Page</b-button
+      >
     </b-card>
   </div>
 </template>
@@ -24,8 +35,21 @@ export default {
       required: true,
     },
     position: {
+      type: Number,
+      required: true,
+    },
+    id: {
       type: String,
       required: true,
+    },
+    profilePicURL: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    movetoPersonalPage() {
+      this.$router.push("playerpage/172104");
     },
   },
 };

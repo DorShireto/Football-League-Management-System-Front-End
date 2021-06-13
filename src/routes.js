@@ -23,6 +23,11 @@ const routes = [
     component: () => import("./pages/SearchPage")
   },
   {
+    path: "/playerpage/:playerId",
+    name: "playerpage",
+    component: () => import("./pages/PlayerPage")
+  },
+  {
     path: "*",
     name: "notFound",
     component: Main
