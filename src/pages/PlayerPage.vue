@@ -10,7 +10,7 @@
     <div>
       Common Name: {{ commonName }}<br />
       Nationality: {{ nationality }}<br />
-      Birth Date: {{ dateOfBirth }}<br />
+      Birth Date: {{ birthdate }}<br />
       Birth Country: {{ birthCountry }}<br />
       Height: {{ height }}<br />
       <label v-if="weight">{{ weight }}</label>
@@ -38,7 +38,7 @@ export default {
       required: true,
     },
     previewPosition: {
-      type: Number,
+      type: String,
       required: true,
     },
     commonName: {
@@ -49,7 +49,7 @@ export default {
       type: String,
       required: true,
     },
-    dateOfBirth: {
+    birthdate: {
       type: String,
       required: true,
     },

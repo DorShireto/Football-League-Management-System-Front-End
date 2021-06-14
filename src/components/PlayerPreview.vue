@@ -2,6 +2,7 @@
   <div class="player-preview">
     <b-card
       id="playerCard"
+      :img-src="profilePicURL"
       img-alt="Image"
       tag="article"
       style="max-width: 25rem"
@@ -13,7 +14,8 @@
         <br />
         <b>Position:</b> {{ position }}
         <br />
-        <b>Profilepic:</b> {{ profilePicURL }}
+        <!-- <img :src="`${profilePicURL}`" /> -->
+        <!-- <b>Profilepic:</b> {{ profilePicURL }} -->
       </b-card-text>
       <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
         >Personal Page</b-button
@@ -49,7 +51,7 @@ export default {
   },
   methods: {
     movetoPersonalPage() {
-      this.$router.push("playerpage/172104");
+      this.$router.push("playerpage/" + this.id);
     },
   },
 };
@@ -71,7 +73,7 @@ export default {
 .player-preview .player-title {
   text-align: center;
   text-transform: uppercase;
-  color: rgb(111, 197, 157);
+  color: rgb(0, 0, 0);
 }
 
 .player-preview .player-content {
