@@ -37,7 +37,7 @@ export default {
       required: true,
     },
     position: {
-      type: Number,
+      type: String,
       required: true,
     },
     id: {

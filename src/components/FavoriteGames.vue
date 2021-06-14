@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h1>MY FAVORITE GAMES:</h1>
+    <div v-show="this.loading">
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
     <GamePreview
       v-for="g in games"
       :id="g.id"
@@ -10,6 +14,9 @@
       :stadium="g.stadium"
       :key="g.id"
     ></GamePreview>
+    <h1 v-if="games.length == 0 && !this.loading">
+      No Favorite Games To Display
+    </h1>
   </div>
 </template>
 
@@ -22,6 +29,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       games: [],
     };
   },
@@ -43,13 +51,17 @@ export default {
           return new Date(a.date) - new Date(b.date);
         });
         games.forEach((game) => {
-          if (this.games.length < 3) {
+          if (this.games.length < 3 && new Date(game.date) >= new Date()) {
+            // no more than 3 FUTURE(!) games
             this.games.push(game);
           }
         });
-        // this.games.push(...games);
         console.log(response);
+        this.loading = false;
       } catch (error) {
+        if (error.response.status == 404) {
+          this.loading = false;
+        }
         console.log("error in update games");
         console.log(error);
       }
