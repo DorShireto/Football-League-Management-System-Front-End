@@ -1,30 +1,52 @@
 <template>
-  <div class="player-preview">
-    <b-card
-      id="playerCard"
-      img-alt="Image"
-      tag="article"
-      style="max-width: 25rem"
-      class=""
-    >
-      <b-card-title>{{ fullName }}</b-card-title>
-      <b-card-text>
-        <b>Team:</b> {{ activeTeam }}
-        <br />
-        <b>Position:</b> {{ position }}
-        <br />
-        <b>Profilepic:</b> {{ profilePicURL }}
-      </b-card-text>
-      <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
-        >Personal Page</b-button
+  <div>
+    <div class="player-preview">
+      <b-card
+        id="playerCard"
+        :img-src="profilePicURL"
+        img-alt="Image"
+        tag="article"
+        style="max-width: 25rem"
+        class=""
       >
-    </b-card>
+        <b-card-title
+          >{{ fullName }}
+          <b-icon
+            v-show="!this.favorite"
+            icon="heart"
+            @click="favoriteHandler"
+          ></b-icon>
+          <b-icon
+            v-show="this.favorite"
+            icon="heart-fill"
+            @click="favoriteHandler"
+          ></b-icon>
+        </b-card-title>
+        <b-card-text>
+          <b>Team:</b> {{ activeTeam }}
+          <br />
+          <b>Position:</b> {{ position }}
+          <br />
+        </b-card-text>
+        <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
+          >Personal Page</b-button
+        >
+      </b-card>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "PlayerPreview",
+  data() {
+    return {
+      favorite: false,
+    };
+  },
+  components: {
+    // BIconBatteryFull,
+  },
   props: {
     fullName: {
       type: String,
@@ -35,7 +57,7 @@ export default {
       required: true,
     },
     position: {
-      type: Number,
+      type: String,
       required: true,
     },
     id: {
@@ -49,8 +71,59 @@ export default {
   },
   methods: {
     movetoPersonalPage() {
-      this.$router.push("playerpage/172104");
+      this.$router.push("playerpage/" + this.id);
     },
+    async favoriteHandler() {
+      if (this.favorite) {
+        //remove from db
+        const response = await this.axios.delete(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/removePlayer/" +
+            this.id
+        );
+        this.favorite = false;
+        console.log(this.id + " player removed from favorites");
+      } else {
+        // add to favorite
+        const response = await this.axios.post(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/addplayer",
+          {
+            playerId: this.id,
+          }
+        );
+        this.favorite = true;
+        console.log(this.id + " player added from favorites");
+      }
+    },
+    async isPlayerFavorite() {
+      // read data from server and try to find this player name in data returns.
+      // update "favorite" attribute
+      try {
+        const response = await this.axios.get(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/favoritePlayers/"
+        );
+        let fav_players = response.data;
+        // console.log(fav_players[0]);
+        for (let i = 0; i < fav_players.length; i++) {
+          const player = fav_players[i];
+          if (player.name === this.fullName) {
+            this.favorite = true;
+          }
+        }
+
+        // console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  mounted() {
+    this.isPlayerFavorite();
   },
 };
 </script>
@@ -71,7 +144,7 @@ export default {
 .player-preview .player-title {
   text-align: center;
   text-transform: uppercase;
-  color: rgb(111, 197, 157);
+  color: rgb(0, 0, 0);
 }
 
 .player-preview .player-content {

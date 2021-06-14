@@ -1,22 +1,29 @@
 <template>
-  <div class="league-preview">
-    <b-card img-alt="Image" tag="article" style="max-width: 25rem" class="">
-      <b-card-title>{{ leagueName }}</b-card-title>
-      <b-card-text>
-        <b>Season:</b> {{ season }}
-        <br />
-        <b>Stage:</b> {{ stage }}
-        <br />
-        <div v-if="stage != 'currently there is no stage available'">
-          <b>Next Match Details:</b> <br />
-          <u>Date:</u> {{ nextMatch.date }}<br />
-          <u>Time:</u> {{ nextMatch.time }}<br />
-          <u> Home Team:</u> {{ nextMatch.homeTeam }}<br />
-          <u>Away Team:</u> {{ nextMatch.awayTeam }}<br />
-          <u>Stadium:</u> {{ nextMatch.stadium }}<br />
-        </div>
-      </b-card-text>
-    </b-card>
+  <div>
+    <h3>League Information</h3>
+    <div v-show="this.loading" class="row">
+      <h3>Loading</h3>
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
+    <div class="league-preview" v-show="!this.loading">
+      <b-card img-alt="Image" tag="article" style="max-width: 25rem" class="">
+        <b-card-title>{{ leagueName }}</b-card-title>
+        <b-card-text>
+          <b>Season:</b> {{ season }}
+          <br />
+          <b>Stage:</b> {{ stage }}
+          <br />
+          <div v-if="stage != 'currently there is no stage available'">
+            <b>Next Match Details:</b> <br />
+            <u>Date:</u> {{ nextMatch.date }}<br />
+            <u>Time:</u> {{ nextMatch.time }}<br />
+            <u> Home Team:</u> {{ nextMatch.homeTeam }}<br />
+            <u>Away Team:</u> {{ nextMatch.awayTeam }}<br />
+            <u>Stadium:</u> {{ nextMatch.stadium }}<br />
+          </div>
+        </b-card-text>
+      </b-card>
+    </div>
   </div>
 </template>
 
@@ -24,6 +31,7 @@
 export default {
   data() {
     return {
+      loading: true,
       leagueName: "Superliga",
       season: "season",
       stage: "stage",
@@ -40,6 +48,7 @@ export default {
     this.season = response.data.seasonName;
     this.stage = response.data.stageName;
     this.nextMatch = response.data.nextMatch;
+    this.loading = false;
   },
 };
 </script>

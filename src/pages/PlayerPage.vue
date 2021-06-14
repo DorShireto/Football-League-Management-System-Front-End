@@ -6,11 +6,12 @@
       :activeTeam="previewActiveTeam"
       :position="previewPosition"
       :profilePicURL="profilePicURL"
+      :id="this.$route.params.playerId"
     ></PlayerPreview>
     <div>
       Common Name: {{ commonName }}<br />
       Nationality: {{ nationality }}<br />
-      Birth Date: {{ dateOfBirth }}<br />
+      Birth Date: {{ birthdate }}<br />
       Birth Country: {{ birthCountry }}<br />
       Height: {{ height }}<br />
       <label v-if="weight">{{ weight }}</label>
@@ -26,45 +27,20 @@ export default {
     PlayerPreview,
   },
   data() {
-    return {};
+    return {
+      previewName: "",
+      previewActiveTeam: "",
+      previewPosition: 0,
+      commonName: "",
+      nationality: "",
+      birthdate: "",
+      birthCountry: "",
+      height: "",
+      weight: "",
+      profilePicURL: "",
+    };
   },
-  props: {
-    previewName: {
-      type: String,
-      required: true,
-    },
-    previewActiveTeam: {
-      type: String,
-      required: true,
-    },
-    previewPosition: {
-      type: Number,
-      required: true,
-    },
-    commonName: {
-      type: String,
-      required: true,
-    },
-    nationality: {
-      type: String,
-      required: true,
-    },
-    dateOfBirth: {
-      type: String,
-      required: true,
-    },
-    birthCountry: {
-      type: String,
-      required: true,
-    },
-    height: {
-      type: String,
-      required: true,
-    },
-    weight: {
-      type: String,
-    },
-  },
+
   async mounted() {
     alert(this.$route.params.playerId);
     console.log("player page mounted");

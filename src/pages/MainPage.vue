@@ -3,10 +3,11 @@
     <div class="container">
       <h1 class="title">Main Page</h1>
       <PlayerPreview
-        fullName="jhon something"
+        fullName="James Forrest"
         activeTeam="celtic"
         position="3"
         id="172104"
+        profilePicURL="https://cdn.sportmonks.com/images/soccer/players/8/172104.png"
       ></PlayerPreview>
       <div class="row">
         <div class="col"><LeagueInfo></LeagueInfo></div>
@@ -40,16 +41,13 @@ export default {
 
 <style>
 #mainPage {
-  background-image: url("C:/Users/liors/Desktop/BGU/year3/semester6/webDev/hw/hw3.3/assignment-3-3-311327084_312204811/public/imgs/mainpageBG.jpg");
+  /* background-image: url(""); */
   background-repeat: no-repeat;
   /* background-size: auto; */
   background-size: cover;
   height: 100vh;
 }
 
-h1 {
-  color: aliceblue;
-}
 /* <style lang="scss" scoped>
 .RandomRecipes {
   margin: 10px 0 10px;

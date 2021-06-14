@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="loginPage">
     <h1 class="title">Login</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
@@ -125,7 +125,8 @@ export default {
 };
 </script>
 <style>
-.container {
+#loginPage {
   max-width: 400px;
+  background: antiquewhite;
 }
 </style>
