@@ -26,44 +26,54 @@ export default {
     PlayerPreview,
   },
   data() {
-    return {};
+    return {
+      previewName: "",
+      previewActiveTeam: "",
+      previewPosition: "",
+      commonName: "",
+      nationality: "",
+      birthdate: "",
+      birthCountry: "",
+      height: "",
+      weight: "",
+    };
   },
   props: {
-    previewName: {
-      type: String,
-      required: true,
-    },
-    previewActiveTeam: {
-      type: String,
-      required: true,
-    },
-    previewPosition: {
-      type: String,
-      required: true,
-    },
-    commonName: {
-      type: String,
-      required: true,
-    },
-    nationality: {
-      type: String,
-      required: true,
-    },
-    birthdate: {
-      type: String,
-      required: true,
-    },
-    birthCountry: {
-      type: String,
-      required: true,
-    },
-    height: {
-      type: String,
-      required: true,
-    },
-    weight: {
-      type: String,
-    },
+    // previewName: {
+    //   type: String,
+    //   required: true,
+    // },
+    // previewActiveTeam: {
+    //   type: String,
+    //   required: true,
+    // },
+    // previewPosition: {
+    //   type: String,
+    //   required: true,
+    // },
+    // commonName: {
+    //   type: String,
+    //   required: true,
+    // },
+    // nationality: {
+    //   type: String,
+    //   required: true,
+    // },
+    // birthdate: {
+    //   type: String,
+    //   required: true,
+    // },
+    // birthCountry: {
+    //   type: String,
+    //   required: true,
+    // },
+    // height: {
+    //   type: String,
+    //   required: true,
+    // },
+    // weight: {
+    //   type: String,
+    // },
   },
   async mounted() {
     alert(this.$route.params.playerId);

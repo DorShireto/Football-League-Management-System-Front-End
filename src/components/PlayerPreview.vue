@@ -20,6 +20,7 @@
       <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
         >Personal Page</b-button
       >
+      <b-button @click="favoriteHandler"> mark favorite</b-button>
     </b-card>
   </div>
 </template>
@@ -27,6 +28,11 @@
 <script>
 export default {
   name: "PlayerPreview",
+  data() {
+    return {
+      favorite: true,
+    };
+  },
   props: {
     fullName: {
       type: String,
@@ -52,6 +58,21 @@ export default {
   methods: {
     movetoPersonalPage() {
       this.$router.push("playerpage/" + this.id);
+    },
+    async favoriteHandler() {
+      if (this.favorite) {
+        //remove from db
+        const response = await this.axios.get(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/favoritePlayers/"
+        );
+        this.favorite = false;
+      } else {
+        // add to favorite
+
+        this.favorite = true;
+      }
     },
   },
 };

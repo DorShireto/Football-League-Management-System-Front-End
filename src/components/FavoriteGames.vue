@@ -15,7 +15,7 @@
       :key="g.id"
     ></GamePreview>
     <h1 v-if="games.length == 0 && !this.loading">
-      No Favorite Games To Display
+      {{ msg }}
     </h1>
   </div>
 </template>
@@ -31,6 +31,7 @@ export default {
     return {
       loading: true,
       games: [],
+      msg: "",
     };
   },
   methods: {
@@ -59,9 +60,13 @@ export default {
         console.log(response);
         this.loading = false;
       } catch (error) {
+        this.loading = false;
+
         if (error.response.status == 404) {
-          this.loading = false;
-        }
+          this.msg = "No Favorite Games To Display";
+        } else if (error.response.status == 401)
+          this.msg = "Error Accured: Unauthorized";
+
         console.log("error in update games");
         console.log(error);
       }

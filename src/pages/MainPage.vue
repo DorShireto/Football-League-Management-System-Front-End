@@ -2,13 +2,13 @@
   <div id="mainPage">
     <div class="container">
       <h1 class="title">Main Page</h1>
-      <!-- <PlayerPreview
+      <PlayerPreview
         fullName="James Forrest"
         activeTeam="celtic"
         position="3"
         id="172104"
         profilePicURL="https://cdn.sportmonks.com/images/soccer/players/8/172104.png"
-      ></PlayerPreview> -->
+      ></PlayerPreview>
       <div class="row">
         <div class="col"><LeagueInfo></LeagueInfo></div>
         <div class="col-6">
@@ -33,7 +33,7 @@ export default {
     LeagueInfo,
     LoginPage,
     FavoriteGames,
-    // PlayerPreview,
+    PlayerPreview,
   },
 };
 </script>
