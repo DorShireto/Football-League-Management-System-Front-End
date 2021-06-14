@@ -3,10 +3,10 @@
     <GamePreview
       v-for="g in games"
       :id="g.id"
-      :homeTeam="g.hostTeam"
-      :awayTeam="g.guestTeam"
+      :homeTeam="g.homeTeam"
+      :awayTeam="g.awayTeam"
       :date="g.date"
-      :time="g.hour"
+      :time="g.time"
       :stadium="g.stadium"
       :key="g.id"
     ></GamePreview>
@@ -22,22 +22,7 @@ export default {
   },
   data() {
     return {
-      games: [
-        // {
-        //   id: 25,
-        //   hostTeam: "Maccabi Tel-Aviv",
-        //   guestTeam: "Hapoel Beer-Sheva",
-        //   date: "27/5/21",
-        //   hour: "20:00",
-        // },
-        // {
-        //   id: 39,
-        //   hostTeam: "Hapoel Tel-Aviv",
-        //   guestTeam: "Maccabi Haifa",
-        //   date: "29/5/21",
-        //   hour: "20:00",
-        // },
-      ],
+      games: [],
     };
   },
   methods: {
@@ -47,13 +32,22 @@ export default {
         const response = await this.axios.get(
           this.$root.store.server_domain +
             this.$root.store.server_port +
-            "/users/favoriteMatches",
-          { withCredentials: true }
+            "/users/favoriteMatches"
+          // { withCredentials: true }
         );
         console.log(response);
         const games = response.data;
         this.games = [];
-        this.games.push(...games);
+        // sort games by date asc
+        games.sort((a, b) => {
+          return new Date(a.date) - new Date(b.date);
+        });
+        games.forEach((game) => {
+          if (this.games.length < 3) {
+            this.games.push(game);
+          }
+        });
+        // this.games.push(...games);
         console.log(response);
       } catch (error) {
         console.log("error in update games");
