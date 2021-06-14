@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     async updateGames() {
-      console.log("response");
       try {
         const response = await this.axios.get(
           this.$root.store.server_domain +
@@ -44,7 +43,7 @@ export default {
             "/users/favoriteMatches"
           // { withCredentials: true }
         );
-        console.log(response);
+        // console.log(response);
         const games = response.data;
         this.games = [];
         // sort games by date asc
@@ -57,7 +56,7 @@ export default {
             this.games.push(game);
           }
         });
-        console.log(response);
+        // console.log(response);
         this.loading = false;
       } catch (error) {
         this.loading = false;
@@ -66,9 +65,10 @@ export default {
           this.msg = "No Favorite Games To Display";
         } else if (error.response.status == 401)
           this.msg = "Error Accured: Unauthorized";
-
-        console.log("error in update games");
-        console.log(error);
+        else {
+          console.log("error in update games");
+          console.log(error);
+        }
       }
     },
   },
