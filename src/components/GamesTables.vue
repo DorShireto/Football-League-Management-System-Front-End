@@ -1,42 +1,55 @@
 <template>
-  <div class="game-table">
-    <b-table class="table table-bordered" id="futureGames">
-      <thead>
-        <th scope="col">#</th>
-        <th scope="col">Home Team</th>
-        <th scope="col">Away Team</th>
-        <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th scope="col">Stadium</th>
-      </thead>
-      <tbody>
-        <tr v-for="(match, index) in futureMatches" :key="match.id">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ match.homeTeam }}</td>
-          <td>{{ match.awayTeam }}</td>
-          <td>{{ match.date }}</td>
-          <td>{{ match.time }}</td>
-          <td>{{ match.stadium }}</td>
-        </tr>
-      </tbody>
-    </b-table>
+  <div>
+    <div>
+      <b-table striped hover :items="items" :fields="fields"></b-table>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GamesTables",
+  data() {
+    return {
+      fields: ["home_team", "away_team", "date", "time", "stadium"],
+      items: [
+        // {
+        //   home_team: "test",
+        //   away_team: "test",
+        //   date: "test",
+        //   time: "test",
+        //   stadium: "test",
+        // },
+      ],
+    };
+  },
   props: {
     futureMatches: {
       type: Array,
       required: true,
     },
   },
-  mounted() {
-    console.log("game preview mounted");
+  created() {
+    debugger;
+
+    for (let i = 0; i < this.$props.futureMatches.length; i++) {
+      let match = this.$props.futureMatches[i];
+      alert("GameTable component mounted");
+      console.log("In gametable mounted component");
+      debugger;
+
+      let { homeTeam, awayTeam, date, time, stadium } = match;
+      console.log(match);
+
+      this.items.push({
+        home_team: homeTeam,
+        away_team: awayTeam,
+        date: date,
+        time: time,
+        stadium: stadium,
+      });
+      alert(this.items.length);
+      alert(this.items[0]);
+    }
   },
 };
 </script>
-
-<style>
-</style>

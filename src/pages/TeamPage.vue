@@ -4,7 +4,7 @@
       <h1>Welcome to {{ name }} Page!</h1>
       Future matches: <br />
       <b-row>
-        <GamesTables></GamesTables>
+        <GamesTables :futureMatches="this.futureMatches"></GamesTables>
       </b-row>
       <!-- <b-row>
         <GamesTables :prevMatches="prevMatches"></GamesTables>
