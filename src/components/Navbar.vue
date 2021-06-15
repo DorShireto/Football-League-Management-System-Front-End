@@ -8,7 +8,7 @@
         <b-nav-item :to="{ name: 'search' }">Current Stage</b-nav-item>
         <b-nav-item :to="{ name: 'playerpage' }">Playerpage</b-nav-item>
         <b-nav-item-dropdown text="Favorites" right v-if="$root.store.username">
-          <b-dropdown-item href="#">Games</b-dropdown-item>
+          <b-dropdown-item href="#/favoritegames">Games</b-dropdown-item>
           <b-dropdown-item href="#">Players</b-dropdown-item>
           <b-dropdown-item href="#">Teams</b-dropdown-item>
         </b-nav-item-dropdown>

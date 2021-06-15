@@ -4,19 +4,22 @@
     <div v-show="this.loading">
       <b-spinner label="Loading..."></b-spinner>
     </div>
-    <GamePreview
-      v-for="g in games"
-      :id="g.id"
-      :homeTeam="g.homeTeam"
-      :awayTeam="g.awayTeam"
-      :date="g.date"
-      :time="g.time"
-      :stadium="g.stadium"
-      :key="g.id"
-    ></GamePreview>
-    <h1 v-if="games.length == 0 && !this.loading">
-      {{ msg }}
-    </h1>
+    <div class="row">
+      <GamePreview
+        v-for="g in games"
+        :id="g.id"
+        :homeTeam="g.homeTeam"
+        :awayTeam="g.awayTeam"
+        :date="g.date"
+        :time="g.time"
+        :stadium="g.stadium"
+        :key="g.id"
+        class="col"
+      ></GamePreview>
+      <h1 v-if="games.length == 0 && !this.loading">
+        {{ msg }}
+      </h1>
+    </div>
   </div>
 </template>
 
@@ -33,6 +36,12 @@ export default {
       games: [],
       msg: "",
     };
+  },
+  props: {
+    num_of_games_to_display: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     async updateGames() {
@@ -51,7 +60,10 @@ export default {
           return new Date(a.date) - new Date(b.date);
         });
         games.forEach((game) => {
-          if (this.games.length < 3 && new Date(game.date) >= new Date()) {
+          if (
+            this.games.length < this.num_of_games_to_display &&
+            new Date(game.date) >= new Date()
+          ) {
             // no more than 3 FUTURE(!) games
             this.games.push(game);
           }

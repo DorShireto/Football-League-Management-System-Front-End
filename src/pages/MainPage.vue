@@ -2,6 +2,8 @@
   <div id="mainPage">
     <div class="container">
       <h1 class="title">Main Page</h1>
+      <button v-on:click="loadTeamPage">Team Page</button>
+
       <PlayerPreview
         fullName="James Forrest"
         activeTeam="celtic"
@@ -16,7 +18,7 @@
             class="float-right"
             v-if="!$root.store.username"
           ></LoginPage>
-          <FavoriteGames v-else></FavoriteGames>
+          <FavoriteGames v-else num_of_games_to_display="3"></FavoriteGames>
         </div>
       </div>
     </div>
@@ -34,6 +36,13 @@ export default {
     LoginPage,
     FavoriteGames,
     PlayerPreview,
+  },
+  methods: {
+    loadTeamPage: function () {
+      debugger;
+      alert("Moving to team page id 939 - Midtjylland");
+      this.$router.push("/teams/page/939");
+    },
   },
 };
 </script>

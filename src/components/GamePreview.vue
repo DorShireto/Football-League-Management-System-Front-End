@@ -53,7 +53,7 @@ export default {
 <style>
 .game-preview {
   display: inline-block;
-  width: 250px;
+  /* min-width: 250px; */
   height: fit-content;
   position: relative;
   margin: 10px 10px;
@@ -66,7 +66,7 @@ export default {
 .game-preview .game-title {
   text-align: center;
   text-transform: uppercase;
-  color: rgb(111, 197, 157);
+  /* color: rgb(111, 197, 157); */
 }
 
 .game-preview .game-content {

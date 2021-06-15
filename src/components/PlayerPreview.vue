@@ -10,17 +10,25 @@
         class=""
       >
         <b-card-title
-          >{{ fullName }}
-          <b-icon
-            v-show="!this.favorite"
-            icon="heart"
-            @click="favoriteHandler"
-          ></b-icon>
-          <b-icon
-            v-show="this.favorite"
-            icon="heart-fill"
-            @click="favoriteHandler"
-          ></b-icon>
+          ><u @click="movetoPersonalPage">{{ fullName }}</u>
+          <span class="ml-3">
+            <b-spinner
+              v-show="!this.favorite_loaded"
+              variant="info"
+              type="grow"
+            ></b-spinner>
+            <b-icon
+              v-show="!this.favorite && this.favorite_loaded"
+              icon="heart"
+              @click="favoriteHandler"
+            ></b-icon>
+            <b-icon
+              v-show="this.favorite && this.favorite_loaded"
+              icon="heart-fill"
+              variant="danger"
+              @click="favoriteHandler"
+            ></b-icon>
+          </span>
         </b-card-title>
         <b-card-text>
           <b>Team:</b> {{ activeTeam }}
@@ -28,9 +36,9 @@
           <b>Position:</b> {{ position }}
           <br />
         </b-card-text>
-        <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
-          >Personal Page</b-button
-        >
+        <!-- <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
+          >Personal Page</b-button 
+         > -->
       </b-card>
     </div>
   </div>
@@ -42,6 +50,7 @@ export default {
   data() {
     return {
       favorite: false,
+      favorite_loaded: false,
     };
   },
   components: {
@@ -115,14 +124,16 @@ export default {
             this.favorite = true;
           }
         }
+        this.favorite_loaded = true;
 
         // console.log(response);
       } catch (error) {
+        this.favorite_loaded = true;
         console.log(error);
       }
     },
   },
-  mounted() {
+  created() {
     this.isPlayerFavorite();
   },
 };
