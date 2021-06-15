@@ -53,7 +53,7 @@ export default {
 <style>
 .game-preview {
   display: inline-block;
-  width: 250px;
+  min-width: 350px;
   height: fit-content;
   position: relative;
   margin: 10px 10px;

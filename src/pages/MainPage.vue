@@ -16,7 +16,7 @@
             class="float-right"
             v-if="!$root.store.username"
           ></LoginPage>
-          <FavoriteGames v-else></FavoriteGames>
+          <FavoriteGames v-else num_of_games_to_display="3"></FavoriteGames>
         </div>
       </div>
     </div>
