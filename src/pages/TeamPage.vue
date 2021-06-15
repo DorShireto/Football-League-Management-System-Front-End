@@ -20,9 +20,10 @@
         <PlayerPreview
           v-for="player in players"
           :key="player.id"
-          :fullName="player.fullName"
+          :fullName="player.fullname"
           :activeTeam="player.activeTeam"
           :id="player.id"
+          :position="player.position"
           :profilePicURL="player.profilePicURL"
         ></PlayerPreview>
       </b-row>
