@@ -8,17 +8,24 @@
         tag="article"
         style="max-width: 25rem"
         class=""
+        @click="movetoPersonalPage"
       >
-        <b-card-title
+        <b-card-title @click="movetoPersonalPage"
           >{{ fullName }}
+          <b-spinner
+            v-show="!this.favorite_loaded"
+            variant="info"
+            type="grow"
+          ></b-spinner>
           <b-icon
-            v-show="!this.favorite"
+            v-show="!this.favorite && this.favorite_loaded"
             icon="heart"
             @click="favoriteHandler"
           ></b-icon>
           <b-icon
-            v-show="this.favorite"
+            v-show="this.favorite && this.favorite_loaded"
             icon="heart-fill"
+            variant="danger"
             @click="favoriteHandler"
           ></b-icon>
         </b-card-title>
@@ -28,9 +35,9 @@
           <b>Position:</b> {{ position }}
           <br />
         </b-card-text>
-        <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
-          >Personal Page</b-button
-        >
+        <!-- <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
+          >Personal Page</b-button 
+         > -->
       </b-card>
     </div>
   </div>
@@ -42,6 +49,7 @@ export default {
   data() {
     return {
       favorite: false,
+      favorite_loaded: false,
     };
   },
   components: {
@@ -115,14 +123,16 @@ export default {
             this.favorite = true;
           }
         }
+        this.favorite_loaded = true;
 
         // console.log(response);
       } catch (error) {
+        this.favorite_loaded = true;
         console.log(error);
       }
     },
   },
-  mounted() {
+  created() {
     this.isPlayerFavorite();
   },
 };
