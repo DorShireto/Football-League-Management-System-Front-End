@@ -8,10 +8,9 @@
         tag="article"
         style="max-width: 25rem"
         class=""
-        @click="movetoPersonalPage"
       >
-        <b-card-title @click="movetoPersonalPage"
-          >{{ fullName }}
+        <b-card-title
+          ><u @click="movetoPersonalPage">{{ fullName }}</u>
           <b-spinner
             v-show="!this.favorite_loaded"
             variant="info"
