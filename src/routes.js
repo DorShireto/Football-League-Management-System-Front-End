@@ -28,6 +28,11 @@ const routes = [
     component: () => import("./pages/PlayerPage")
   },
   {
+    path: "/favoriteGames",
+    name: "FavoriteGamesPage",
+    component: () => import("./pages/FavoriteGamesPage")
+  },
+  {
     path: "*",
     name: "notFound",
     component: Main
