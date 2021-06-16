@@ -12,30 +12,40 @@
       <!-- <AddMatch v-show="displayAddMatch"></AddMatch> -->
       <AddMatch></AddMatch>
     </b-toast>
+    <GameTableC :items="league_matches"></GameTableC>
   </div>
 </template>
 
 <script>
 import AddMatch from "../components/AddMatch.vue";
+import GameTableC from "../components/GameTableC.vue";
 export default {
   data() {
     return {
-      displayAddMatch: false,
+      league_matches: [],
     };
   },
   methods: {
-    // addMatchHandler() {
-    //   this.displayAddMatch = !this.displayAddMatch;
-    // },
+    async loadMatches() {
+      console.log("league management page mounted");
+      const matches = await this.axios.get(
+        this.$root.store.server_domain +
+          this.$root.store.server_port +
+          "/league/matches"
+      );
+      console.log(matches);
+      this.league_matches = matches.data;
+    },
   },
   components: {
     AddMatch,
+    GameTableC,
+  },
+  async mounted() {
+    this.loadMatches();
   },
 };
 </script>
 
 <style>
-#addMatch-toast {
-  width: 3200px;
-}
 </style>
