@@ -125,16 +125,6 @@ export default {
           this.favorite = true;
         }
         this.favorite_loaded = true;
-
-        // console.log(fav_players[0]);
-        // for (let i = 0; i < fav_players.length; i++) {
-        //   const player = fav_players[i];
-        //   if (player.name === this.fullName) {
-        //     this.favorite = true;
-        //   }
-        // }
-
-        // console.log(response);
       } catch (error) {
         this.favorite_loaded = true;
         console.log(error);

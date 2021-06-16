@@ -12,7 +12,10 @@
       <!-- <AddMatch v-show="displayAddMatch"></AddMatch> -->
       <AddMatch></AddMatch>
     </b-toast>
-    <GameTableC :items="league_matches"></GameTableC>
+    <GameTableC
+      :items="league_matches"
+      :fields="league_matches_headers"
+    ></GameTableC>
   </div>
 </template>
 
@@ -23,6 +26,8 @@ export default {
   data() {
     return {
       league_matches: [],
+      league_matches_headers: this.$root.store.matchHeaders_WO_mec,
+      //   league_matches_headers: this.$root.store.matchHeaders_With_mec,
     };
   },
   methods: {
