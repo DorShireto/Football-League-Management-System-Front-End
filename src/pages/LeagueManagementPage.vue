@@ -1,7 +1,13 @@
 <template>
   <div>
     <h1>League Management Page</h1>
-    <b-button
+    <b-button v-b-modal.modal-addMatch class="m-2" variant="primary"
+      >Add New Match</b-button
+    >
+    <b-modal id="modal-addMatch" title="Add New Match">
+      <AddMatch></AddMatch>
+    </b-modal>
+    <!-- <b-button
       class="m-2"
       variant="primary"
       @click="$bvToast.show('addMatch-toast')"
@@ -9,19 +15,14 @@
       Add New Match
     </b-button>
     <b-toast id="addMatch-toast" title="Add New Match" static no-auto-hide>
-      <AddMatch></AddMatch>
-    </b-toast>
-    <b-button
-      class="m-2"
-      variant="primary"
-      @click="$bvToast.show('mec-toast')"
-      v-show="mec"
+    </b-toast> -->
+
+    <b-button v-b-modal.modal-mec class="m-2" variant="primary"
+      >Match Event Calendar</b-button
     >
-      Match Event Calendar
-    </b-button>
-    <b-toast id="mec-toast" title="Match Event Calendar" static no-auto-hide>
+    <b-modal id="modal-mec" title="Add Event To Match Event Calendar">
       <MatchEventCalendar :matchEventCalendar="this.mec"></MatchEventCalendar>
-    </b-toast>
+    </b-modal>
 
     <GameTableC
       :items="league_matches"

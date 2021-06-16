@@ -12,9 +12,12 @@
           <b-dropdown-item href="#">Players</b-dropdown-item>
           <b-dropdown-item href="#">Teams</b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-item
+        <!-- <b-nav-item
           :to="{ name: 'leaguemanagement' }"
           v-if="$root.store.role == 'asso_member'"
+          >League Menegment</b-nav-item
+        > -->
+        <b-nav-item :to="{ name: 'leaguemanagement' }"
           >League Menegment</b-nav-item
         >
 

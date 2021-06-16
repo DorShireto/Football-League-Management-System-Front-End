@@ -16,7 +16,7 @@
     <b-button v-b-modal.modal-1>Add Event</b-button>
 
     <b-modal id="modal-1" title="Add Event To Match Event Calendar">
-      <NewEventForm></NewEventForm>
+      <EventForm></EventForm>
       <!-- <p class="my-4">Hello from modal!</p> -->
     </b-modal>
 
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NewEventForm from "../components/EventForm.vue";
+import EventForm from "../components/EventForm.vue";
 export default {
   name: "MatchEventCalendar",
   data() {
@@ -35,7 +35,7 @@ export default {
     };
   },
   components: {
-    NewEventForm,
+    EventForm,
   },
   props: {
     matchEventCalendar: {
