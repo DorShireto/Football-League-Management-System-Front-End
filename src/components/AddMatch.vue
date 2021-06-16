@@ -312,8 +312,8 @@ export default {
             lineReferee1: this.form.lineReferee1,
             lineReferee2: this.form.lineReferee2,
             stadium: this.form.stadium,
-            time: this.form.time,
-            date: this.form.date,
+            time: this.time,
+            date: this.date,
           }
         );
         console.log("add match success here is the response:");
@@ -333,6 +333,8 @@ export default {
       }
       // console.log("register method go");
       this.AddMatch();
+      this.$router.go(); //refresh page
+      //   this.$router.push({ name: "leaguemanagement" });
     },
     onReset() {
       console.log("reset button pressed");
