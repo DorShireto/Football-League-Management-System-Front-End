@@ -5,8 +5,15 @@
       :items="items"
       :fields="fields"
       sort-icon-left
+      :busy="isBusy"
       responsive="sm"
     >
+      <template #table-busy>
+        <div class="text-center text-primary my-2">
+          <b-spinner class="align-middle"></b-spinner>
+          <strong>Loading...</strong>
+        </div>
+      </template>
     </b-table>
   </div>
 </template>
@@ -24,7 +31,12 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      isBusy: true,
+    };
+  },
+  updated() {
+    this.isBusy = false;
   },
 };
 </script>
