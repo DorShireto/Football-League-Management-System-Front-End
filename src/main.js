@@ -83,11 +83,14 @@ const shared_data = {
     localStorage.setItem("username", username);
     this.username = username;
     console.log("login", this.username);
+    router.push({ name: 'main' })
+
   },
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
+    router.push({ name: 'main' })
   }
 };
 // console.log(shared_data);

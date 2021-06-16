@@ -119,8 +119,8 @@ export default {
         );
         console.log("response from /users/checkIfPlayerFavorite/");
         console.log(response);
-        let status = response.status;
-        if (status == "200") {
+        // let status = response.status;
+        if (response.data == true) {
           //player fav
           this.favorite = true;
         }
