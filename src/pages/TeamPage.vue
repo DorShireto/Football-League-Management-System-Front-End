@@ -13,7 +13,7 @@
       <b-row>
         <GamesTablesC
           :items="prevMatches"
-          :fields="prevMatchesField"
+          :fields="prevTableField"
         ></GamesTablesC>
       </b-row>
       <b-row>
@@ -45,7 +45,7 @@ export default {
       futureMatches: [],
       futureTableField: [],
       prevMatches: [],
-      prevMatchesField: [],
+      prevTableField: [],
       players: [],
       name: "",
       logoURL: "",
