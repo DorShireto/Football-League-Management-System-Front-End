@@ -126,6 +126,8 @@ const shared_data = {
     { key: "stadium" },
 
   ],
+  allPlayers: [],
+  allTeams: [],
 
   role: localStorage.role,
   login(username) {

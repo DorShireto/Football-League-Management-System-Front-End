@@ -47,8 +47,6 @@ export default {
         "id",
         "leagueName",
         "seasonName",
-        "seasonName",
-        "seasonName",
         "stageName",
         "homeTeam",
         "awayTeam",
@@ -63,8 +61,6 @@ export default {
       prevTableField: [
         "id",
         "leagueName",
-        "seasonName",
-        "seasonName",
         "seasonName",
         "stageName",
         "homeTeam",

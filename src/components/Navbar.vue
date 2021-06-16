@@ -5,7 +5,7 @@
       <b-navbar-nav>
         <b-nav-item :to="{ name: 'main' }">Home</b-nav-item>
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
-        <b-nav-item :to="{ name: 'search' }">Current Stage</b-nav-item>
+        <b-nav-item href="#/currentstage">Current Stage</b-nav-item>
         <b-nav-item :to="{ name: 'tests' }">tests_page</b-nav-item>
         <b-nav-item-dropdown text="Favorites" right v-if="$root.store.username">
           <b-dropdown-item href="#/favoritegames">Games</b-dropdown-item>
