@@ -56,7 +56,7 @@ export default {
       const response = await this.axios.get(
         this.$root.store.server_domain +
           this.$root.store.server_port +
-          "/teams/page/id/" +
+          "/teams/page/" +
           this.$route.params.teamId
       );
       return response;
@@ -68,7 +68,7 @@ export default {
       this.players = teamData.data.players;
       this.name = teamData.data.name;
       this.logoURL = teamData.data.logoURL;
-      debugger;
+      // debugger;
     },
     addFutureMatches(data) {
       this.futureTableField = [
