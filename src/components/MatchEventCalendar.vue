@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import NewEventForm from "../components/NewEventForm.vue";
+import NewEventForm from "../components/EventForm.vue";
 export default {
   name: "MatchEventCalendar",
   data() {
