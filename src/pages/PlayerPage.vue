@@ -44,12 +44,22 @@ export default {
   async mounted() {
     alert(this.$route.params.playerId);
     console.log("player page mounted");
+    console.log(
+      "sending req" +
+        this.$root.store.server_domain +
+        this.$root.store.server_port +
+        "/players/fullDetails/" +
+        this.$route.params.playerId
+    );
+
     const response = await this.axios.get(
       this.$root.store.server_domain +
         this.$root.store.server_port +
         "/players/fullDetails/" +
         this.$route.params.playerId
     );
+    console.log("sent req");
+
     console.log(response);
     this.profilePicURL = response.data.playerPreview.image;
     this.commonName = response.data.common_name;

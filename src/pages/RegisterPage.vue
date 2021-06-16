@@ -142,7 +142,7 @@
         <b-form-invalid-feedback v-if="!$v.form.email.required">
           email is required
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-if="!$v.form.lastName.email">
+        <b-form-invalid-feedback v-if="!$v.form.email">
           invalid Email!
         </b-form-invalid-feedback> </b-form-group
       ><!-- email -->

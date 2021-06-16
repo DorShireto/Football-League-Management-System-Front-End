@@ -66,11 +66,11 @@ export default {
       required: true,
     },
     position: {
-      type: String,
+      type: Number,
       required: true,
     },
     id: {
-      type: String,
+      type: Number,
       required: true,
     },
     profilePicURL: {
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     movetoPersonalPage() {
-      this.$router.push("playerpage/" + this.id);
+      this.$router.push({ name: "playerpage", params: { playerId: this.id } });
     },
     async favoriteHandler() {
       if (this.favorite) {
@@ -98,33 +98,41 @@ export default {
         const response = await this.axios.post(
           this.$root.store.server_domain +
             this.$root.store.server_port +
-            "/users/addplayer",
+            "/users/addPlayer",
           {
             playerId: this.id,
           }
         );
         this.favorite = true;
-        console.log(this.id + " player added from favorites");
+        console.log(this.id + " player added to favorites");
       }
     },
-    async isPlayerFavorite() {
+    async isPlayerFavorite(playerId) {
       // read data from server and try to find this player name in data returns.
       // update "favorite" attribute
       try {
         const response = await this.axios.get(
           this.$root.store.server_domain +
             this.$root.store.server_port +
-            "/users/favoritePlayers/"
+            "/users/checkIfPlayerFavorite/" +
+            playerId
         );
-        let fav_players = response.data;
-        // console.log(fav_players[0]);
-        for (let i = 0; i < fav_players.length; i++) {
-          const player = fav_players[i];
-          if (player.name === this.fullName) {
-            this.favorite = true;
-          }
+        console.log("response from /users/checkIfPlayerFavorite/");
+        console.log(response);
+        let status = response.status;
+        if (status == "200") {
+          //player fav
+          this.favorite = true;
         }
         this.favorite_loaded = true;
+
+        // console.log(fav_players[0]);
+        // for (let i = 0; i < fav_players.length; i++) {
+        //   const player = fav_players[i];
+        //   if (player.name === this.fullName) {
+        //     this.favorite = true;
+        //   }
+        // }
 
         // console.log(response);
       } catch (error) {
@@ -134,7 +142,7 @@ export default {
     },
   },
   created() {
-    this.isPlayerFavorite();
+    this.isPlayerFavorite(this.id);
   },
 };
 </script>

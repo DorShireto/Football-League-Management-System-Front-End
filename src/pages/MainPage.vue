@@ -4,13 +4,13 @@
       <h1 class="title">Main Page</h1>
       <button v-on:click="loadTeamPage">Team Page</button>
 
-      <PlayerPreview
+      <!-- <PlayerPreview
         fullName="James Forrest"
         activeTeam="celtic"
         position="3"
         id="172104"
         profilePicURL="https://cdn.sportmonks.com/images/soccer/players/8/172104.png"
-      ></PlayerPreview>
+      ></PlayerPreview> -->
       <div class="row">
         <div class="col"><LeagueInfo></LeagueInfo></div>
         <div class="col-6">
@@ -35,11 +35,11 @@ export default {
     LeagueInfo,
     LoginPage,
     FavoriteGames,
-    PlayerPreview,
+    // PlayerPreview,
   },
   methods: {
     loadTeamPage: function () {
-      debugger;
+      // debugger;
       alert("Moving to team page id 939 - Midtjylland");
       this.$router.push("/teams/page/939");
     },

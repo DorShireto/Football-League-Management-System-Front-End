@@ -78,7 +78,7 @@ const shared_data = {
   username: localStorage.username,
   server_domain: "http://localhost:",
   server_port: 3000,
-  // username: "guest",
+  role: "",
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;

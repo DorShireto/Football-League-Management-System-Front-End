@@ -103,6 +103,7 @@ export default {
         // this.$root.loggedIn = true;
         // console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
+        // this.$root.store.role.set(this.fo)
         this.$router.push("/");
       } catch (err) {
         console.log(err.response);
