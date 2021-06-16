@@ -107,7 +107,7 @@ const shared_data = {
     { key: "lineReferee1" },
     { key: "lineReferee2" },
     { key: "date", sortable: true },
-    { key: "time", sortable: true },
+    { key: "time" },
     { key: "stadium" },
     { key: "matchEventCalendar" }
   ],
