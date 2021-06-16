@@ -13,7 +13,7 @@
           <b-dropdown-item href="#">Teams</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item
-          :to="{ name: 'leaguemenegment' }"
+          :to="{ name: 'leaguemanagement' }"
           v-if="$root.store.role == 'asso_member'"
           >League Menegment</b-nav-item
         >

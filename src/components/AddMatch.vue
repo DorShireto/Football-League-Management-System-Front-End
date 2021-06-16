@@ -4,7 +4,7 @@
     <b-form @submit.prevent="onAddMatch" @reset.prevent="onReset">
       <b-form-group
         id="input-group-leaguename"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="League Name:"
         label-for="leagueName"
       >
@@ -22,7 +22,7 @@
 
       <b-form-group
         id="input-group-seasonName"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Season Name:"
         label-for="seasonName"
       >
@@ -39,7 +39,7 @@
 
       <b-form-group
         id="input-group-stageName"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Stage Name:"
         label-for="stageName"
       >
@@ -55,7 +55,7 @@
 
       <b-form-group
         id="input-group-homeTeam"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Home Team:"
         label-for="homeTeam"
       >
@@ -71,7 +71,7 @@
 
       <b-form-group
         id="input-group-awayTeam"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Away Team:"
         label-for="awayTeam"
       >
@@ -87,8 +87,8 @@
 
       <b-form-group
         id="input-group-stadium"
-        label-cols-sm="2"
-        label="Stadium:"
+        label-cols-sm="3"
+        label="Stadium: "
         label-for="stadium"
       >
         <b-form-input
@@ -103,7 +103,7 @@
 
       <b-form-group
         id="input-group-refereeName"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Referee Name:"
         label-for="refereeName"
       >
@@ -122,7 +122,7 @@
 
       <b-form-group
         id="input-group-lineReferee1"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Line Referee 1 Name:"
         label-for="lineReferee1"
       >
@@ -141,7 +141,7 @@
 
       <b-form-group
         id="input-group-lineReferee2"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Line Referee 2 Name:"
         label-for="lineReferee2"
       >
@@ -160,7 +160,7 @@
 
       <b-form-group
         id="input-group-time"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Match Time:"
         label-for="time"
       >
@@ -172,7 +172,7 @@
 
       <b-form-group
         id="input-group-date"
-        label-cols-sm="2"
+        label-cols-sm="3"
         label="Match Date:"
         label-for="date"
       >

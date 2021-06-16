@@ -78,19 +78,22 @@ const shared_data = {
   username: localStorage.username,
   server_domain: "http://localhost:",
   server_port: 3000,
-  role: "",
+  role: localStorage.role,
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
     console.log("login", this.username);
     router.push({ name: 'main' })
-
   },
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
     router.push({ name: 'main' })
+  },
+  set_role(role_name) {
+    this.role = role_name;
+    console.log("finished and logged as " + this.role);
   }
 };
 // console.log(shared_data);

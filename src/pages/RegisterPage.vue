@@ -307,7 +307,9 @@ export default {
             role: this.form.role.toLowerCase(),
           }
         );
-        this.$router.push("/login");
+        this.$router.push({ name: "login" });
+
+        // this.$router.push("/login");
         // console.log(response);
       } catch (err) {
         console.log(err.response);

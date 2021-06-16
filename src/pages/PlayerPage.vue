@@ -42,7 +42,7 @@ export default {
   },
 
   async mounted() {
-    alert(this.$route.params.playerId);
+    // alert(this.$route.params.playerId);
     console.log("player page mounted");
     console.log(
       "sending req" +

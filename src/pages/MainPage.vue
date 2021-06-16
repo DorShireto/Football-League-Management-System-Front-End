@@ -41,6 +41,8 @@ export default {
     loadTeamPage: function () {
       // debugger;
       alert("Moving to team page id 939 - Midtjylland");
+      // this.$router.push({ name: "teampage", params: { teamId: this.id } });
+
       this.$router.push("/teams/page/939");
     },
   },

@@ -147,7 +147,7 @@ export default {
   },
 
   async mounted() {
-    alert(this.$route.params.teamId);
+    // alert(this.$route.params.teamId);
     const teamData = await this.getTeamData();
     this.setAllData(teamData);
     // console.log("team page mounted");
