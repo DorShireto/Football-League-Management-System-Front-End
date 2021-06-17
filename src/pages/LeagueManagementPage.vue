@@ -7,31 +7,10 @@
     <b-modal id="modal-addMatch" title="Add New Match">
       <AddMatch></AddMatch>
     </b-modal>
-    <!-- <b-button
-      class="m-2"
-      variant="primary"
-      @click="$bvToast.show('addMatch-toast')"
-    >
-      Add New Match
-    </b-button>
-    <b-toast id="addMatch-toast" title="Add New Match" static no-auto-hide>
-    </b-toast> -->
-
-    <b-button v-b-modal.modal-mec class="m-2" variant="primary"
-      >Match Event Calendar</b-button
-    >
-    <b-modal id="modal-mec" title="Add Event To Match Event Calendar">
-      <MatchEventCalendar
-        :matchData="matchData"
-        :matchEventCalendar="this.mec"
-        :matchId="this.matchId"
-      ></MatchEventCalendar>
-    </b-modal>
 
     <GameTableC
       :items="league_matches"
       :fields="league_matches_headers"
-      v-on:rowClicked="getRowData"
     ></GameTableC>
   </div>
 </template>
@@ -39,15 +18,13 @@
 <script>
 import AddMatch from "../components/AddMatch.vue";
 import GameTableC from "../components/GameTableC.vue";
-import MatchEventCalendar from "../components/MatchEventCalendar.vue";
 
 export default {
   data() {
     return {
       league_matches: [],
-      league_matches_headers: this.$root.store.matchHeaders_WO_mec,
-      mec: null,
-      matchId: "",
+      league_matches_headers: this.$root.store.matchHeaders_With_mec,
+
       matchData: null,
     };
   },
@@ -62,16 +39,10 @@ export default {
       console.log(matches);
       this.league_matches = matches.data;
     },
-    getRowData(data) {
-      this.matchData = data;
-      this.mec = data.matchEventCalendar;
-      this.matchId = data.id;
-    },
   },
   components: {
     AddMatch,
     GameTableC,
-    MatchEventCalendar,
   },
   async mounted() {
     this.loadMatches();

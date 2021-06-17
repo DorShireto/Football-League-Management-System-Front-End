@@ -1,6 +1,5 @@
 <template>
   <div id="newEvent">
-    <h1 class="title">New Event</h1>
     <b-form @submit.prevent="onAdd">
       <!-- min in match -->
       <b-form-group
@@ -14,7 +13,6 @@
           v-model="$v.form.minInMatch.$model"
           type="text"
           :state="validateState('minInMatch')"
-          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback v-if="!$v.form.minInMatch.required">
           minute in match is required
@@ -36,7 +34,6 @@
           v-model="$v.form.description.$model"
           type="text"
           :state="validateState('description')"
-          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback>
           description is required
@@ -89,12 +86,12 @@
           v-model="$v.form.playerName.$model"
           type="text"
           :state="validateState('playerName')"
-          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback>
           Player Name is required
         </b-form-invalid-feedback>
       </b-form-group>
+      <b-button type="submit">Submit</b-button>
     </b-form>
     <b-alert
       class="mt-2"
@@ -111,7 +108,7 @@
 <script>
 import { required, between } from "vuelidate/lib/validators";
 export default {
-  name: "NewEventForm",
+  name: "EventForm",
   data() {
     return {
       types: [
@@ -179,18 +176,19 @@ export default {
       if (this.$v.form.$anyError) {
         return;
       }
-    },
-    handleChange() {
-      console.log("handling data change");
-      this.$emit("dataUpdated", {
+      this.$emit("closeModalEvent", {
         minInMatch: this.form.minInMatch,
         description: this.form.description,
         teamName: this.form.teamName,
         type: this.form.type,
         playerName: this.form.playerName,
       });
-      console.log("dataUpdated event fired");
     },
+    // handleChange() {
+    //   console.log("handling data change");
+    //   this.$emit("dataUpdated", );
+    //   console.log("dataUpdated event fired");
+    // },
   },
 };
 </script>
