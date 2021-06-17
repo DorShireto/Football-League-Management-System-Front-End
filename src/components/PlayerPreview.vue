@@ -1,34 +1,31 @@
 <template>
   <div>
     <div class="player-preview">
-      <b-card
-        id="playerCard"
-        :img-src="profilePicURL"
-        img-alt="Image"
-        tag="article"
-        style="max-width: 25rem"
-        class=""
-      >
+      <b-card id="playerCard" tag="article" style="max-width: 25rem" class="">
+        <img v-bind:src="profilePicURL" @click="movetoPersonalPage" />
+        <span class="ml-3">
+          <b-spinner
+            v-show="!this.favorite_loaded"
+            variant="info"
+            type="grow"
+            font-scale="2"
+          ></b-spinner>
+          <b-icon
+            v-show="!this.favorite && this.favorite_loaded"
+            icon="heart"
+            font-scale="2"
+            @click="favoriteHandler"
+          ></b-icon>
+          <b-icon
+            v-show="this.favorite && this.favorite_loaded"
+            icon="heart-fill"
+            variant="danger"
+            font-scale="2"
+            @click="favoriteHandler"
+          ></b-icon>
+        </span>
         <b-card-title
           ><u @click="movetoPersonalPage">{{ fullName }}</u>
-          <span class="ml-3">
-            <b-spinner
-              v-show="!this.favorite_loaded"
-              variant="info"
-              type="grow"
-            ></b-spinner>
-            <b-icon
-              v-show="!this.favorite && this.favorite_loaded"
-              icon="heart"
-              @click="favoriteHandler"
-            ></b-icon>
-            <b-icon
-              v-show="this.favorite && this.favorite_loaded"
-              icon="heart-fill"
-              variant="danger"
-              @click="favoriteHandler"
-            ></b-icon>
-          </span>
         </b-card-title>
         <b-card-text>
           <b>Team:</b> {{ activeTeam }}

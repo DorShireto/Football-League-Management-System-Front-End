@@ -55,8 +55,5 @@ export default {
 </script>
 
 <style>
-#search-input {
-  /* margin-left: 20px; */
-  /* width: 500px; */
-}
+
 </style>

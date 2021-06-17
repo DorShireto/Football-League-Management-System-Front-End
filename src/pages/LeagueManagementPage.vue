@@ -36,6 +36,7 @@
       id="zain"
       :items="prevMatches"
       :fields="prevTableField"
+      :selectable="true"
     ></GameTableC>
 
     <!-- <GameTableC
