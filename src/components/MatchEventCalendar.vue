@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h5 v-if="!matchEventCalendar.length">
+      Currently there are no events to display
+    </h5>
     <b-button v-b-modal.modal-1>Add Event</b-button>
 
     <div
