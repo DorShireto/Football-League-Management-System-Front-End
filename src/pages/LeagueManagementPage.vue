@@ -4,8 +4,25 @@
     <b-button v-b-modal.modal-addMatch class="m-2" variant="primary"
       >Add New Match</b-button
     >
-    <b-modal id="modal-addMatch" title="Add New Match">
+    <b-modal
+      id="modal-addMatch"
+      title="Add New Match"
+      scrollable
+      v-model="showModal"
+    >
       <AddMatch></AddMatch>
+      <template #modal-footer>
+        <div class="w-100">
+          <b-button
+            variant="primary"
+            size="sm"
+            class="float-left"
+            @click="showModal = false"
+          >
+            Close
+          </b-button>
+        </div>
+      </template>
     </b-modal>
 
     <GameTableC
@@ -24,7 +41,7 @@ export default {
     return {
       league_matches: [],
       league_matches_headers: this.$root.store.matchHeaders_With_mec,
-
+      showModal: false,
       matchData: null,
     };
   },
