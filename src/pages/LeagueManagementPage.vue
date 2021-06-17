@@ -21,7 +21,10 @@
       >Match Event Calendar</b-button
     >
     <b-modal id="modal-mec" title="Add Event To Match Event Calendar">
-      <MatchEventCalendar :matchEventCalendar="this.mec"></MatchEventCalendar>
+      <MatchEventCalendar
+        :matchEventCalendar="this.mec"
+        :matchId="this.matchId"
+      ></MatchEventCalendar>
     </b-modal>
 
     <GameTableC
@@ -43,6 +46,7 @@ export default {
       league_matches: [],
       league_matches_headers: this.$root.store.matchHeaders_WO_mec,
       mec: null,
+      matchId: "",
     };
   },
   methods: {
@@ -58,6 +62,7 @@ export default {
     },
     getRowData(data) {
       this.mec = data.matchEventCalendar;
+      this.matchId = data.id;
     },
   },
   components: {

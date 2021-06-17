@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>MATCH EVENT CALENDAR</h1>
+    <h3>MATCH EVENT CALENDAR</h3>
     <div
       v-for="event in matchEventCalendar"
       :key="event.id"
-      style="border: solid; margin-top: 5px; padding: 5px"
+      style="border: solid; margin: 5px; padding: 5px"
     >
       <b>Minute In Match: </b>{{ event.minInMatch }}<br />
       <b>Description: </b>{{ event.description }}<br />
@@ -49,6 +49,10 @@ export default {
     EventForm,
   },
   props: {
+    matchId: {
+      type: Number,
+      required: true,
+    },
     matchEventCalendar: {
       type: Array,
       required: true,
@@ -56,7 +60,7 @@ export default {
   },
   methods: {
     openEventModal() {},
-    addEvent() {
+    async addEvent() {
       // only at this point we use the data
       console.log(
         "MEC: ok btn clicked in new event form. adding data to match event calendar"
@@ -68,24 +72,20 @@ export default {
         type: this.newEvent.type,
         playerName: this.newEvent.playerName,
       });
-      //write the event to DB:
-      // const response = await this.axios.post(
-      //       // $root.store.server_domain + $root.store.server_port + "/Register",
-      //       this.$root.store.server_domain +
-      //         this.$root.store.server_port +
-      //         "/Register",
-      //       {
-      //         username: this.form.username,
-      //         firstName: this.form.firstName,
-      //         lastName: this.form.lastName,
-      //         country: this.form.country,
-      //         password: this.form.password,
-      //         email: this.form.email,
-      //         profilePic: "",
-      //         // profilePic: this.form.profilePic,
-      //         role: this.form.role.toLowerCase(),
-      //       }
-      //     );
+      //   write the event to DB:
+      const response = await this.axios.post(
+        this.$root.store.server_domain +
+          this.$root.store.server_port +
+          "/league/addMatchEvent",
+        {
+          matchId: this.matchId,
+          teamName: this.newEvent.teamName,
+          description: this.newEvent.description,
+          type: this.newEvent.type,
+          playerName: this.newEvent.playerName,
+          minInMatch: this.newEvent.minInMatch,
+        }
+      );
     },
     handleEventFormChange(eventFormData) {
       //copy data from event to local variables on every change

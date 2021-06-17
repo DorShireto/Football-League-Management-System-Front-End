@@ -16,8 +16,11 @@
           :state="validateState('minInMatch')"
           @change="handleChange"
         ></b-form-input>
-        <b-form-invalid-feedback>
-          Minute In Match is required
+        <b-form-invalid-feedback v-if="!$v.form.minInMatch.required">
+          minute in match is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-else-if="!$v.form.minInMatch.between">
+          minute in match should be between 0-90
         </b-form-invalid-feedback>
       </b-form-group>
       <!-- description -->
@@ -104,7 +107,7 @@
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, between } from "vuelidate/lib/validators";
 export default {
   name: "NewEventForm",
   data() {
@@ -123,6 +126,7 @@ export default {
     form: {
       minInMatch: {
         required,
+        between: between(0, 90),
       },
       description: {
         required,
