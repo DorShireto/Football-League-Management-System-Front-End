@@ -20,7 +20,10 @@
       title="Add Event To Match Event Calendar"
       @ok="addEvent"
     >
-      <EventForm v-on:dataUpdated="handleEventFormChange"></EventForm>
+      <EventForm
+        v-on:dataUpdated="handleEventFormChange"
+        :matchData="matchData"
+      ></EventForm>
       <!-- <p class="my-4">Hello from modal!</p> -->
     </b-modal>
 
@@ -49,6 +52,10 @@ export default {
     EventForm,
   },
   props: {
+    matchData: {
+      type: Object,
+      required: true,
+    },
     matchId: {
       type: Number,
       required: true,

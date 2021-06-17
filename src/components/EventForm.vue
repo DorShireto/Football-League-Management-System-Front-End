@@ -23,6 +23,7 @@
           minute in match should be between 0-90
         </b-form-invalid-feedback>
       </b-form-group>
+
       <!-- description -->
       <b-form-group
         id="input-group-description"
@@ -41,6 +42,7 @@
           description is required
         </b-form-invalid-feedback>
       </b-form-group>
+
       <!-- teamName -->
       <b-form-group
         id="input-group-teamName"
@@ -48,17 +50,17 @@
         label="Team Name:"
         label-for="teamName"
       >
-        <b-form-input
+        <b-form-select
           id="teamName"
           v-model="$v.form.teamName.$model"
-          type="text"
+          :options="teamNames"
           :state="validateState('teamName')"
-          @change="handleChange"
-        ></b-form-input>
+        ></b-form-select>
         <b-form-invalid-feedback>
           Team Name is required
         </b-form-invalid-feedback>
       </b-form-group>
+
       <!-- type -->
       <b-form-group
         id="input-group-type"
@@ -66,15 +68,15 @@
         label="Type:"
         label-for="type"
       >
-        <b-form-input
+        <b-form-select
           id="type"
           v-model="$v.form.type.$model"
-          type="text"
+          :options="types"
           :state="validateState('type')"
-          @change="handleChange"
-        ></b-form-input>
+        ></b-form-select>
         <b-form-invalid-feedback> Type is required </b-form-invalid-feedback>
       </b-form-group>
+
       <!-- playerName -->
       <b-form-group
         id="input-group-playerName"
@@ -112,6 +114,16 @@ export default {
   name: "NewEventForm",
   data() {
     return {
+      types: [
+        "Goal",
+        "Offside",
+        "Fault",
+        "Red Card",
+        "Yellow Card",
+        "Injury",
+        "Submission",
+      ],
+      teamNames: [],
       form: {
         minInMatch: "",
         description: "",
@@ -121,6 +133,12 @@ export default {
         submitError: undefined,
       },
     };
+  },
+  props: {
+    matchData: {
+      type: Object,
+      required: true,
+    },
   },
   validations: {
     form: {
@@ -141,6 +159,13 @@ export default {
         required,
       },
     },
+  },
+  mounted() {
+    console.log("event form mounted");
+
+    this.teamNames.push(this.matchData.homeTeam);
+    this.teamNames.push(this.matchData.awayTeam);
+    // console.log($v);
   },
   methods: {
     validateState(param) {
