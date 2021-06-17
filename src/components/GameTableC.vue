@@ -8,10 +8,13 @@
       sort-icon-left
       :busy="isBusy"
       responsive="sm"
-      selectable
-      :select-mode="selectMode"
-      @row-selected="onRowSelected"
     >
+      <template #cell(matchEventCalendar)="row">
+        <b-button size="sm" @click="handle_MEC_click(row)" class="mr-2">
+          Event Calendar
+        </b-button>
+      </template>
+
       <template #table-busy>
         <div class="text-center text-primary my-2">
           <b-spinner class="align-middle"></b-spinner>
@@ -19,12 +22,25 @@
         </div>
       </template>
     </b-table>
-    <!-- <p>{{ this.selected_data }}</p> -->
+    <b-modal id="modal-mec" title="Match Event Calendar" scrollable>
+      <MatchEventCalendar :matchData="matchData"></MatchEventCalendar>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import MatchEventCalendar from "./MatchEventCalendar.vue";
 export default {
+  data() {
+    return {
+      isBusy: true,
+      selectMode: "single",
+      matchData: {},
+    };
+  },
+  components: {
+    MatchEventCalendar,
+  },
   props: {
     items: {
       type: Array,
@@ -35,17 +51,11 @@ export default {
       required: false,
     },
   },
-  data() {
-    return {
-      isBusy: true,
-      selectMode: "single",
-      selected_data: null, //not necesery its for debug option
-    };
-  },
+
   methods: {
-    onRowSelected(item) {
-      this.selected_data = item[0]; //not necesery its for debug option
-      this.$emit("rowClicked", item[0]);
+    handle_MEC_click(item) {
+      this.matchData = item.item;
+      this.$bvModal.show("modal-mec");
     },
   },
   updated() {

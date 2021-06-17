@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3>MATCH EVENT CALENDAR</h3>
+    <b-button v-b-modal.modal-1>Add Event</b-button>
+
     <div
       v-for="event in matchEventCalendar"
       :key="event.id"
@@ -13,17 +14,29 @@
       <b>Player Name: </b>{{ event.playerName }}<br />
       <br />
     </div>
-    <b-button v-b-modal.modal-1>Add Event</b-button>
 
     <b-modal
       id="modal-1"
-      title="Add Event To Match Event Calendar"
+      title="Add New Match Event"
       @ok="addEvent"
+      v-model="showModal"
     >
       <EventForm
-        v-on:dataUpdated="handleEventFormChange"
+        v-on:closeModalEvent="handleCloseModal"
         :matchData="matchData"
       ></EventForm>
+      <template #modal-footer>
+        <div class="w-100">
+          <b-button
+            variant="primary"
+            size="sm"
+            class="float-left"
+            @click="showModal = false"
+          >
+            Close
+          </b-button>
+        </div>
+      </template>
       <!-- <p class="my-4">Hello from modal!</p> -->
     </b-modal>
 
@@ -38,6 +51,7 @@ export default {
   name: "MatchEventCalendar",
   data() {
     return {
+      matchEventCalendar: [],
       showModal: false,
       newEvent: {
         minInMatch: "",
@@ -56,51 +70,41 @@ export default {
       type: Object,
       required: true,
     },
-    matchId: {
-      type: Number,
-      required: true,
-    },
-    matchEventCalendar: {
-      type: Array,
-      required: true,
-    },
+  },
+  mounted() {
+    this.matchEventCalendar = this.matchData.matchEventCalendar;
   },
   methods: {
-    openEventModal() {},
     async addEvent() {
       // only at this point we use the data
-      console.log(
-        "MEC: ok btn clicked in new event form. adding data to match event calendar"
-      );
-      this.matchEventCalendar.push({
+      console.log("adding data to match event calendar");
+      //build object to add to matchEventCalendar
+      let eventToadd = {
+        matchId: this.matchData.id,
         minInMatch: this.newEvent.minInMatch,
         description: this.newEvent.description,
         teamName: this.newEvent.teamName,
         type: this.newEvent.type,
         playerName: this.newEvent.playerName,
-      });
+      };
+      this.matchEventCalendar.push(eventToadd);
+      console.log(eventToadd);
       //   write the event to DB:
       const response = await this.axios.post(
         this.$root.store.server_domain +
           this.$root.store.server_port +
           "/league/addMatchEvent",
-        {
-          matchId: this.matchId,
-          teamName: this.newEvent.teamName,
-          description: this.newEvent.description,
-          type: this.newEvent.type,
-          playerName: this.newEvent.playerName,
-          minInMatch: this.newEvent.minInMatch,
-        }
+        eventToadd
       );
     },
-    handleEventFormChange(eventFormData) {
-      //copy data from event to local variables on every change
+    handleCloseModal(eventFormData) {
+      this.showModal = false;
       this.newEvent.minInMatch = eventFormData.minInMatch;
       this.newEvent.description = eventFormData.description;
       this.newEvent.teamName = eventFormData.teamName;
       this.newEvent.type = eventFormData.type;
       this.newEvent.playerName = eventFormData.playerName;
+      this.addEvent();
     },
   },
 };
