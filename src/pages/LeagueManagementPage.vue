@@ -29,6 +29,7 @@
       id="matchesTable"
       :items="league_matches"
       :fields="league_matches_headers"
+      :showAddEventBtn="true"
     ></GameTableC>
   </div>
 </template>
@@ -43,7 +44,6 @@ export default {
       league_matches: [],
       league_matches_headers: this.$root.store.matchHeaders_With_mec,
       showModal: false,
-      matchData: null,
     };
   },
   methods: {

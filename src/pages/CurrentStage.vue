@@ -4,46 +4,35 @@
     <H2>Super League Season 2020/2021</H2>
     <br />
     <H3>Future Matches</H3>
-    <GamesTablesC
+    <GamesTableC
+      id="zain2"
       :items="futureMatches"
       :fields="futureTableField"
-    ></GamesTablesC>
+    ></GamesTableC>
     <br />
     <H3>Previous Matches</H3>
-    <GamesTablesC :items="prevMatches" :fields="prevTableField"></GamesTablesC>
+    <GamesTableC
+      id="zain"
+      :items="prevMatches"
+      :fields="prevTableField"
+    ></GamesTableC>
   </div>
 </template>
 
+
 <script>
-import GamesTablesC from "../components/GameTableC.vue";
+import GamesTableC from "../components/GameTableC.vue";
 export default {
   name: "CurrentStage",
   components: {
-    GamesTablesC,
+    GamesTableC,
   },
   data() {
     return {
       futureMatches: [],
-      futureTableField: [
-        "id",
-        "homeTeam",
-        "awayTeam",
-        "date",
-        "time",
-        "stadium",
-      ],
       prevMatches: [],
-      prevTableField: [
-        "id",
-        "homeTeam",
-        "awayTeam",
-        "homeScore",
-        "awayScore",
-        "date",
-        "time",
-        "stadium",
-        "matchEventCalendar",
-      ],
+      futureTableField: this.$root.store.future_match_headers,
+      prevTableField: this.$root.store.matchHeaders_With_mec,
     };
   },
   methods: {

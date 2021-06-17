@@ -3,7 +3,7 @@
     <h5 v-if="!matchEventCalendar.length">
       Currently there are no events to display
     </h5>
-    <b-button v-b-modal.modal-1>Add Event</b-button>
+    <b-button v-show="showAddEventBtn" v-b-modal.modal-1>Add Event</b-button>
 
     <div
       v-for="event in matchEventCalendar"
@@ -72,6 +72,10 @@ export default {
     matchData: {
       type: Object,
       required: true,
+    },
+    showAddEventBtn: {
+      type: Boolean,
+      required: false,
     },
   },
   mounted() {

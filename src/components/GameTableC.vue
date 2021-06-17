@@ -7,10 +7,16 @@
       sticky-header
       sort-icon-left
       :busy="isBusy"
+      :filter="filter"
       responsive="sm"
     >
       <template #cell(matchEventCalendar)="row">
-        <b-button size="sm" @click="handle_MEC_click(row)" class="mr-2">
+        <b-button
+          v-b-modal.modal-mec
+          size="sm"
+          @click="handle_MEC_click(row)"
+          class="mr-2"
+        >
           Event Calendar
         </b-button>
       </template>
@@ -22,8 +28,16 @@
         </div>
       </template>
     </b-table>
-    <b-modal id="modal-mec" title="Match Event Calendar" scrollable>
-      <MatchEventCalendar :matchData="matchData"></MatchEventCalendar>
+    <b-modal
+      id="modal-mec"
+      title="Match Event Calendar"
+      scrollable
+      @hide="closeModal"
+    >
+      <MatchEventCalendar
+        :matchData="matchData"
+        :showAddEventBtn="showAddEventBtn"
+      ></MatchEventCalendar>
     </b-modal>
   </div>
 </template>
@@ -42,6 +56,10 @@ export default {
     MatchEventCalendar,
   },
   props: {
+    filter: {
+      type: String,
+      required: false,
+    },
     items: {
       type: Array,
       required: false,
@@ -50,17 +68,27 @@ export default {
       type: Array,
       required: false,
     },
+    showAddEventBtn: {
+      type: Boolean,
+      required: false,
+    },
   },
 
   methods: {
     handle_MEC_click(item) {
       this.matchData = item.item;
-      this.$bvModal.show("modal-mec");
+      // this.$bvModal.show("modal-mec");
+    },
+    closeModal() {
+      this.$bvModal.hide("modal-mec");
     },
   },
   updated() {
     this.isBusy = false;
   },
+  // mounted() {
+  //   $(this.$refs.mymodal).on("hidden.bs.modal", this.dor);
+  // },
 };
 </script>
 <style >

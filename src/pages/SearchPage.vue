@@ -12,7 +12,7 @@
 
     <div>
       Players Search:
-      <b-col lg="6" class="my-1">
+      <!-- <b-col lg="6" class="my-1">
         <b-form-group
           label="Filter"
           label-for="filter-input"
@@ -36,9 +36,9 @@
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
-      </b-col>
+      </b-col> -->
 
-      <b-col lg="6" class="my-1">
+      <!-- <b-col lg="6" class="my-1">
         <b-form-group
           v-model="sortDirection"
           label="Filter On"
@@ -59,17 +59,23 @@
             <b-form-checkbox value="position">Position</b-form-checkbox>
           </b-form-checkbox-group>
         </b-form-group>
-      </b-col>
-      <GamesTablesC
-        :items="this.playersData"
-        :fields="this.playersTableFields"
-      ></GamesTablesC>
+      </b-col> -->
+
+      <b-row>
+        <b-col>
+          <GamesTableC
+            :filter="searchQuery"
+            :items="this.playersData"
+            :fields="this.playersTableFields"
+          ></GamesTableC>
+        </b-col>
+      </b-row>
     </div>
   </div>
 </template>
 
 <script>
-import GamesTablesC from "../components/GameTableC.vue";
+import GamesTableC from "../components/GameTableC.vue";
 export default {
   data() {
     return {
@@ -79,7 +85,7 @@ export default {
     };
   },
   components: {
-    GamesTablesC,
+    GamesTableC,
   },
   mounted() {
     this.playersData = this.$root.store.allPlayers;
