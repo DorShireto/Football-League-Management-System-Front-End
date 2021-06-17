@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="gameTableMain">
     <b-table
       striped
       :items="items"
@@ -63,4 +63,9 @@ export default {
   },
 };
 </script>
+<style >
+#gameTableMain {
+  min-height: 70%;
+}
+</style>
 

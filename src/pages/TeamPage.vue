@@ -1,21 +1,26 @@
 <template>
   <div id="teamPage">
-    <div class="container">
-      <h1>Welcome to {{ name }} Page!</h1>
-      Future Matches: <br />
+    <div class="ml-3">
+      <div class="text-center">
+        <h1>Welcome to {{ name }} Page!</h1>
+        <img v-bind:src="logoURL" style="width: 300px" /><br />
+      </div>
+      <h3>Future Matches:</h3>
+      <br />
       <b-row>
         <GamesTablesC
           :items="futureMatches"
           :fields="futureTableField"
         ></GamesTablesC>
       </b-row>
-      Previous Matches: <br />
-      <b-row>
+      <h3>Previous Matches:</h3>
+      <br />
+      <div>
         <GamesTablesC
           :items="prevMatches"
           :fields="prevTableField"
         ></GamesTablesC>
-      </b-row>
+      </div>
       <b-row>
         <PlayerPreview
           v-for="player in players"
@@ -73,6 +78,7 @@ export default {
         "date",
         "time",
         "stadium",
+        "matchEventCalendar",
       ],
       players: [],
       name: "",
@@ -94,7 +100,7 @@ export default {
       this.futureMatches = teamData.data.futureMatches;
       this.futureTableField = this.$root.store.future_match_headers;
       this.prevMatches = teamData.data.prevMatches;
-      this.prevTableField = this.$root.store.matchHeaders_WO_mec;
+      this.prevTableField = this.$root.store.matchHeaders_With_mec;
       this.players = teamData.data.players;
       this.name = teamData.data.name;
       this.logoURL = teamData.data.logoURL;
