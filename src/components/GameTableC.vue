@@ -64,8 +64,5 @@ export default {
 };
 </script>
 <style >
-#gameTableMain {
-  min-height: 70%;
-}
 </style>
 

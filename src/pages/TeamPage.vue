@@ -1,27 +1,22 @@
 <template>
   <div id="teamPage">
-    <div class="ml-3">
+    <div class="">
       <div class="text-center">
         <h1>Welcome to {{ name }} Page!</h1>
         <img v-bind:src="logoURL" style="width: 300px" /><br />
       </div>
       <h3>Future Matches:</h3>
       <br />
-      <b-row>
-        <GamesTablesC
-          :items="futureMatches"
-          :fields="futureTableField"
-        ></GamesTablesC>
-      </b-row>
+
+      <GamesTableC
+        :items="futureMatches"
+        :fields="futureTableField"
+      ></GamesTableC>
+
       <h3>Previous Matches:</h3>
       <br />
-      <div>
-        <GamesTablesC
-          :items="prevMatches"
-          :fields="prevTableField"
-        ></GamesTablesC>
-      </div>
-      <b-row>
+      <GamesTableC :items="prevMatches" :fields="prevTableField"></GamesTableC>
+      <div class="d-flex flex-wrap justify-content-center">
         <PlayerPreview
           v-for="player in players"
           :key="player.id"
@@ -31,18 +26,18 @@
           :position="player.position"
           :profilePicURL="player.profilePicURL"
         ></PlayerPreview>
-      </b-row>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import GamesTablesC from "../components/GameTableC.vue";
+import GamesTableC from "../components/GameTableC.vue";
 import PlayerPreview from "../components/PlayerPreview.vue";
 export default {
   name: "TeamPage",
   components: {
-    GamesTablesC,
+    GamesTableC,
     PlayerPreview,
   },
   data() {
