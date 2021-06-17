@@ -1,33 +1,34 @@
 <template>
-  <div>
-    <h1>player personal page</h1>
-    <PlayerPreview
-      :fullName="previewName"
-      :activeTeam="previewActiveTeam"
-      :position="previewPosition"
-      :profilePicURL="profilePicURL"
-      :id="this.$route.params.playerId"
-    ></PlayerPreview>
-    <div>
-      Common Name: {{ commonName }}<br />
-      Nationality: {{ nationality }}<br />
-      Birth Date: {{ birthdate }}<br />
-      Birth Country: {{ birthCountry }}<br />
-      Height: {{ height }}<br />
-      <label v-if="weight">{{ weight }}</label>
+  <div class="container text-center">
+    <div id="loadingDiv" v-show="loading">
+      <span><b>Loading...</b></span>
+      <b-spinner></b-spinner>
+    </div>
+    <div v-show="!loading">
+      <h1>{{ previewName }} Personal Page</h1>
+      <img v-bind:src="profilePicURL" style="width: 300px" />
+      <div>
+        <br />
+        Active Team: {{ previewActiveTeam }}<br />
+        Position: {{ previewPosition }}<br />
+        Common Name: {{ commonName }}<br />
+        Nationality: {{ nationality }}<br />
+        Birth Date: {{ birthdate }}<br />
+        Birth Country: {{ birthCountry }}<br />
+        Height: {{ height }}<br />
+        <label v-if="weight">{{ weight }}</label>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import PlayerPreview from "../components/PlayerPreview";
 export default {
   name: "PlayerPage",
-  components: {
-    PlayerPreview,
-  },
+  components: {},
   data() {
     return {
+      loading: "true",
       previewName: "",
       previewActiveTeam: "",
       previewPosition: 0,
@@ -71,6 +72,7 @@ export default {
     this.previewName = response.data.playerPreview.name;
     this.previewActiveTeam = response.data.playerPreview.activeTeam;
     this.previewPosition = response.data.playerPreview.position;
+    this.loading = false;
   },
 };
 </script>

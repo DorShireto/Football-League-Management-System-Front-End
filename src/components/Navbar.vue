@@ -7,11 +7,13 @@
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
         <b-nav-item href="#/currentstage">Current Stage</b-nav-item>
         <b-nav-item :to="{ name: 'tests' }">tests_page</b-nav-item>
-        <b-nav-item-dropdown text="Favorites" right v-if="$root.store.username">
-          <b-dropdown-item href="#/favoritegames">Games</b-dropdown-item>
-          <b-dropdown-item href="#">Players</b-dropdown-item>
-          <b-dropdown-item href="#">Teams</b-dropdown-item>
-        </b-nav-item-dropdown>
+        <b-nav-item
+          text="Favorite Matches"
+          v-if="$root.store.username"
+          :to="{ name: 'FavoriteGamesPage' }"
+          >Favorite Matches</b-nav-item
+        >
+
         <!-- <b-nav-item
           :to="{ name: 'leaguemanagement' }"
           v-if="$root.store.role == 'asso_member'"

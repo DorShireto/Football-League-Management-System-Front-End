@@ -26,6 +26,7 @@
     </b-modal>
 
     <GameTableC
+      id="matchesTable"
       :items="league_matches"
       :fields="league_matches_headers"
     ></GameTableC>
@@ -68,4 +69,7 @@ export default {
 </script>
 
 <style>
+#mainpage {
+  height: 100%;
+}
 </style>
