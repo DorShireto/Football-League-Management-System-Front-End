@@ -166,9 +166,8 @@
       >
         <div>
           <b-form-timepicker v-model="time" locale="en"></b-form-timepicker>
-          <div class="mt-2">Value: '{{ time }}'</div>
-        </div> </b-form-group
-      ><!-- time NEED 2 way BINDING!@!!#!@$!@^%@$#&#$-->
+        </div>
+      </b-form-group>
 
       <b-form-group
         id="input-group-date"
@@ -182,14 +181,12 @@
             v-model="date"
             class="mb-2"
           ></b-form-datepicker>
-          <p>Value: '{{ date }}'</p>
         </div>
       </b-form-group>
-
-      <b-button type="reset" variant="danger">Reset</b-button>
-      <b-button type="submit" variant="primary" class="ml-5 w-10"
+      <b-button type="submit" variant="primary" class="mr-5 w-10"
         >Add Match!</b-button
       >
+      <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <b-alert
       class="mt-2"
