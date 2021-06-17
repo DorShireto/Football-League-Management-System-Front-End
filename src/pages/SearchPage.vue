@@ -1,76 +1,29 @@
 <template>
   <div>
     <h1 class="title">Search Page</h1>
-    <b-input-group prepend="Search Query:" id="search-input">
-      <b-form-input v-model="searchQuery"></b-form-input>
-      <b-input-group-append>
-        <b-button variant="success">Search</b-button>
-      </b-input-group-append>
-    </b-input-group>
-    <br />
-    Your search Query: {{ searchQuery }}
+    <b-button disabled style="opacity: 100%; width: 100%" variant="primary"
+      >Search Player:
+      <b-icon icon="search" animation="throb"></b-icon>
+      <b-form-input v-model="searchPlayerQuery"> </b-form-input>
+    </b-button>
 
-    <div>
-      Players Search:
-      <!-- <b-col lg="6" class="my-1">
-        <b-form-group
-          label="Filter"
-          label-for="filter-input"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-        >
-          <b-input-group size="sm">
-            <b-form-input
-              id="filter-input"
-              v-model="filter"
-              type="search"
-              placeholder="Type to Search"
-            ></b-form-input>
+    <GamesTableC
+      :filter="searchPlayerQuery"
+      :items="this.playersData"
+      :fields="this.playersTableFields"
+    ></GamesTableC>
+    <br /><br />
+    <b-button disabled style="opacity: 100%; width: 100%" variant="primary"
+      >Search Team:
+      <b-icon icon="search" animation="throb"></b-icon>
+      <b-form-input v-model="searchTeamQuery"> </b-form-input>
+    </b-button>
 
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''"
-                >Clear</b-button
-              >
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-col> -->
-
-      <!-- <b-col lg="6" class="my-1">
-        <b-form-group
-          v-model="sortDirection"
-          label="Filter On"
-          description="Leave all unchecked to filter on all data"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-          v-slot="{ ariaDescribedby }"
-        >
-          <b-form-checkbox-group
-            v-model="filterOn"
-            :aria-describedby="ariaDescribedby"
-            class="mt-1"
-          >
-            <b-form-checkbox value="name">Name</b-form-checkbox>
-            <b-form-checkbox value="activeTeam">Active Team</b-form-checkbox>
-            <b-form-checkbox value="position">Position</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
-      </b-col> -->
-
-      <b-row>
-        <b-col>
-          <GamesTableC
-            :filter="searchQuery"
-            :items="this.playersData"
-            :fields="this.playersTableFields"
-          ></GamesTableC>
-        </b-col>
-      </b-row>
-    </div>
+    <GamesTableC
+      :filter="searchTeamQuery"
+      :items="this.teamsData"
+      :fields="this.teamsTableFields"
+    ></GamesTableC>
   </div>
 </template>
 
@@ -79,30 +32,31 @@ import GamesTableC from "../components/GameTableC.vue";
 export default {
   data() {
     return {
-      searchQuery: "",
-      playersData: [],
-      playersTableFields: [],
+      playersData: this.$root.store.allPlayers,
+      teamsData: this.$root.store.allTeams,
+      searchTeamQuery: "",
+      searchPlayerQuery: "",
+      playersTableFields: [
+        { key: "id" },
+        { key: "fullname", sortable: true },
+        { key: "activeTeam", sortable: true },
+        { key: "position", sortable: true },
+      ],
+      teamsTableFields: [
+        { key: "name", sortable: true },
+        { key: "logoURL", sortable: true },
+      ],
     };
   },
   components: {
     GamesTableC,
   },
-  mounted() {
-    this.playersData = this.$root.store.allPlayers;
-    debugger;
-    this.playersTableFields = [
-      { key: "id", sortable: true },
-      { key: "fullname", sortable: true },
-      { key: "activeTeam", sortable: true },
-      { key: "position", sortable: true },
-    ];
-  },
 };
 </script>
 
-<style scoped>
+<style>
 #search-input {
-  margin-left: 20px;
-  width: 500px;
+  /* margin-left: 20px; */
+  /* width: 500px; */
 }
 </style>

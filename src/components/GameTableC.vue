@@ -21,6 +21,10 @@
         </b-button>
       </template>
 
+      <template #cell(logoURL)="row2">
+        <img v-bind:src="row2.item.logoURL" />
+      </template>
+
       <template #table-busy>
         <div class="text-center text-primary my-2">
           <b-spinner class="align-middle"></b-spinner>
