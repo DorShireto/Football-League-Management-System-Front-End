@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3>League Information</h3>
+  <div class="d-flex flex-column align-items-center">
+    <h3 class="text-center">League Information</h3>
     <div v-show="this.loading" class="row">
       <h3>Loading</h3>
       <b-spinner label="Loading..."></b-spinner>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">Search Page</h1>
+    <h1 class="title text-center">Search Page</h1>
     <b-button disabled style="opacity: 100%; width: 100%" variant="primary"
       >Search Player:
       <b-icon icon="search" animation="throb"></b-icon>

@@ -25,6 +25,18 @@
         <img v-bind:src="row2.item.logoURL" />
       </template>
 
+      <template #cell(homeTeam)="row">
+        <a @click="moveToTeamPage(row.item.homeTeam)">{{
+          row.item.homeTeam
+        }}</a>
+      </template>
+
+      <template #cell(awayTeam)="row">
+        <a @click="moveToTeamPage(row.item.awayTeam)">{{
+          row.item.awayTeam
+        }}</a>
+      </template>
+
       <template #table-busy>
         <div class="text-center text-primary my-2">
           <b-spinner class="align-middle"></b-spinner>
@@ -86,10 +98,22 @@ export default {
     closeModal() {
       this.$bvModal.hide("modal-mec");
     },
+    async moveToTeamPage(teamName) {
+      console.log(teamName);
+      let teamId = await this.axios.get(
+        this.$root.store.server_domain +
+          this.$root.store.server_port +
+          "/teams/" +
+          teamName +
+          "/id"
+      );
+      this.$router.push({ name: "teampage", params: { teamId: teamId } });
+    },
   },
   updated() {
     this.isBusy = false;
   },
+
   // mounted() {
   //   $(this.$refs.mymodal).on("hidden.bs.modal", this.dor);
   // },

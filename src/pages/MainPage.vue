@@ -1,16 +1,8 @@
 <template>
   <div id="mainPage">
-    <div class="container">
-      <h1 class="title">Main Page</h1>
+    <div class="">
+      <h1 class="title text-center">Main Page</h1>
       <button v-on:click="loadTeamPage">Team Page</button>
-
-      <!-- <PlayerPreview
-        fullName="James Forrest"
-        activeTeam="celtic"
-        position="3"
-        id="172104"
-        profilePicURL="https://cdn.sportmonks.com/images/soccer/players/8/172104.png"
-      ></PlayerPreview> -->
       <div class="row">
         <div class="col"><LeagueInfo></LeagueInfo></div>
         <div class="col-6">

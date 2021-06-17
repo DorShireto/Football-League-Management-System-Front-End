@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="d-flex flex-column align-items-center">
     <h1>MY FAVORITE GAMES:</h1>
-    <div v-show="this.loading">
+    <!-- <div v-show="this.loading">
       <b-spinner label="Loading..."></b-spinner>
-    </div>
+    </div> -->
     <div class="row">
-      <GamePreview
+      <GameTableC :items="games" :fields="tableHeaders"></GameTableC>
+      <!-- <GamePreview
         v-for="g in games"
         :id="g.id"
         :homeTeam="g.homeTeam"
@@ -15,7 +16,7 @@
         :stadium="g.stadium"
         :key="g.id"
         class="col"
-      ></GamePreview>
+      ></GamePreview> -->
       <h1 v-if="games.length == 0 && !this.loading">
         {{ msg }}
       </h1>
@@ -24,14 +25,17 @@
 </template>
 
 <script>
-import GamePreview from "./GamePreview.vue";
+import GameTableC from "../components/GameTableC.vue";
+// import GamePreview from "./GamePreview.vue";
 export default {
   name: "FavoriteGames",
   components: {
-    GamePreview,
+    // GamePreview,
+    GameTableC,
   },
   data() {
     return {
+      tableHeaders: ["id", "date", "time", "homeTeam", "awayTeam", "stadium"],
       loading: true,
       games: [],
       msg: "",

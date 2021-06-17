@@ -320,7 +320,7 @@ export default {
         this.form.submitError = err.response.data;
       }
     },
-    onAddMatch() {
+    async onAddMatch() {
       console.log("add match method called");
       if (!this.validate_time()) return;
       if (!this.validate_date()) return;
@@ -329,7 +329,8 @@ export default {
         return;
       }
       // console.log("register method go");
-      this.AddMatch();
+      await this.AddMatch();
+
       this.$router.go(); //refresh page
       //   this.$router.push({ name: "leaguemanagement" });
     },

@@ -4,28 +4,28 @@
     <H2>Super League Season 2020/2021</H2>
     <br />
     <H3>Future Matches</H3>
-    <GamesTableC
+    <GameTableC
       id="zain2"
       :items="futureMatches"
       :fields="futureTableField"
-    ></GamesTableC>
+    ></GameTableC>
     <br />
     <H3>Previous Matches</H3>
-    <GamesTableC
+    <GameTableC
       id="zain"
       :items="prevMatches"
       :fields="prevTableField"
-    ></GamesTableC>
+    ></GameTableC>
   </div>
 </template>
 
 
 <script>
-import GamesTableC from "../components/GameTableC.vue";
+import GameTableC from "../components/GameTableC.vue";
 export default {
   name: "CurrentStage",
   components: {
-    GamesTableC,
+    GameTableC,
   },
   data() {
     return {
