@@ -74,7 +74,7 @@ export default {
       }
       this.futureMatches = tmpFutureGames;
       this.prevMatches = tmpPrevGames;
-      debugger;
+      // debugger;
     },
   },
 

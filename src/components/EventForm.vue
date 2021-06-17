@@ -14,6 +14,7 @@
           v-model="$v.form.minInMatch.$model"
           type="text"
           :state="validateState('minInMatch')"
+          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback>
           Minute In Match is required
@@ -31,6 +32,7 @@
           v-model="$v.form.description.$model"
           type="text"
           :state="validateState('description')"
+          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback>
           description is required
@@ -48,6 +50,7 @@
           v-model="$v.form.teamName.$model"
           type="text"
           :state="validateState('teamName')"
+          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback>
           Team Name is required
@@ -65,6 +68,7 @@
           v-model="$v.form.type.$model"
           type="text"
           :state="validateState('type')"
+          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback> Type is required </b-form-invalid-feedback>
       </b-form-group>
@@ -80,6 +84,7 @@
           v-model="$v.form.playerName.$model"
           type="text"
           :state="validateState('playerName')"
+          @change="handleChange"
         ></b-form-input>
         <b-form-invalid-feedback>
           Player Name is required
@@ -145,6 +150,17 @@ export default {
       if (this.$v.form.$anyError) {
         return;
       }
+    },
+    handleChange() {
+      console.log("handling data change");
+      this.$emit("dataUpdated", {
+        minInMatch: this.form.minInMatch,
+        description: this.form.description,
+        teamName: this.form.teamName,
+        type: this.form.type,
+        playerName: this.form.playerName,
+      });
+      console.log("dataUpdated event fired");
     },
   },
 };

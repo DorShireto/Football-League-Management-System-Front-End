@@ -39,7 +39,7 @@ export default {
       }
       let playersArr = this.$root.store.allPlayers;
       let teamsArr = this.$root.store.allTeams;
-      debugger;
+      // debugger;
     },
   },
   async mounted() {

@@ -19,7 +19,7 @@
         </div>
       </template>
     </b-table>
-    <p>{{ this.selected_data }}</p>
+    <!-- <p>{{ this.selected_data }}</p> -->
   </div>
 </template>
 

@@ -36,6 +36,7 @@
 import AddMatch from "../components/AddMatch.vue";
 import GameTableC from "../components/GameTableC.vue";
 import MatchEventCalendar from "../components/MatchEventCalendar.vue";
+
 export default {
   data() {
     return {
