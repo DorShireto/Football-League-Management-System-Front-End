@@ -26,24 +26,25 @@
     </b-modal>
     <h3>Future Matches</h3>
     <GameTableC
-      id="zain2"
+      id=""
       :items="futureMatches"
       :fields="futureTableField"
     ></GameTableC>
     <br />
     <h3>Previous Matches</h3>
     <GameTableC
-      id="zain"
+      id=""
       :items="prevMatches"
       :fields="prevTableField"
       :selectable="true"
+      :showAddEventBtn="true"
     ></GameTableC>
 
     <!-- <GameTableC
       id="matchesTable"
       :items="league_matches"
       :fields="league_matches_headers"
-      :showAddEventBtn="true"
+      
     ></GameTableC> -->
   </div>
 </template>

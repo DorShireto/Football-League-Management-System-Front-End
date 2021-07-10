@@ -3,7 +3,8 @@
     <h5 v-if="!matchEventCalendar.length">
       Currently there are no events to display
     </h5>
-    <b-button v-show="showAddEventBtn" v-b-modal.modal-1>Add Event</b-button>
+    <!-- <b-button v-show="showAddEventBtn" v-b-modal.modal-1>Add Event</b-button> -->
+    <b-button v-show="showAddEventBtn" @click="openModal">Add Event</b-button>
 
     <div
       v-for="event in matchEventCalendar"
@@ -40,11 +41,7 @@
           </b-button>
         </div>
       </template>
-      <!-- <p class="my-4">Hello from modal!</p> -->
     </b-modal>
-
-    <!-- <p>Minute In Match:{{ matchEventCalendar.minInMatch }}</p> -->
-    <!-- <p>Minute In Match:{{ matchEventCalendar.minInMatch }}</p> -->
   </div>
 </template>
 
@@ -103,6 +100,10 @@ export default {
           "/league/addMatchEvent",
         eventToadd
       );
+    },
+    openModal() {
+      console.log("openning add event modal");
+      this.showModal = true;
     },
     handleCloseModal(eventFormData) {
       this.showModal = false;

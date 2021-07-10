@@ -16,7 +16,7 @@
         Birth Date: {{ birthdate }}<br />
         Birth Country: {{ birthCountry }}<br />
         Height: {{ height }}<br />
-        <label v-if="weight">{{ weight }}</label>
+        <label v-if="weight">Weight: {{ weight }}</label>
       </div>
     </div>
   </div>
