@@ -188,7 +188,7 @@
           ></b-form-datepicker>
         </div>
       </b-form-group>
-      <b-button type="submit" variant="primary" class="mr-5 w-10"
+      <b-button type="submit" variant="success " class="mr-5 w-10"
         >Add Match!</b-button
       >
       <b-button type="reset" variant="danger">Reset</b-button>

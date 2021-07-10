@@ -158,14 +158,19 @@
           v-model="$v.form.profilePic.$model"
         ></b-form-input></b-form-group
       >profile picture -->
-
-      <input type="file" name="file" id="file" accept=".jpg, .png, .jpeg" />
-      <p id="url"></p>
+      <b-form-group
+        id="input-group-profilePic"
+        label-cols-sm="3"
+        label="Profile Picture URL:"
+        label-for="profilePic"
+      >
+        <b-form-input id="profilePic"></b-form-input>
+      </b-form-group>
 
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
-        variant="primary"
+        variant="success"
         style="width: 250px"
         class="ml-5 w-75"
         >Register</b-button
@@ -214,7 +219,7 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
-        // profilePic: "",
+        profilePic: "",
         submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
@@ -287,8 +292,7 @@ export default {
             country: this.form.country,
             password: this.form.password,
             email: this.form.email,
-            // profilePic: "",
-            // profilePic: this.form.profilePic,
+            profilePic: this.form.profilePic,
             role: "fan",
           }
         );

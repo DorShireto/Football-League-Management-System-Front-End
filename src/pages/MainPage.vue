@@ -5,10 +5,7 @@
       <div class="row d-flex align-items-center" style="margin-top: 20vh">
         <div class="col"><LeagueInfo></LeagueInfo></div>
         <div class="col-6">
-          <LoginPage
-            class="float-right"
-            v-if="!$root.store.username"
-          ></LoginPage>
+          <LoginPage v-if="!$root.store.username"></LoginPage>
           <FavoriteGames v-else num_of_games_to_display="3"></FavoriteGames>
         </div>
       </div>
@@ -34,7 +31,6 @@ export default {
 #mainPage {
   /* background-image: url(""); */
   background-repeat: no-repeat;
-  /* background-size: auto; */
   background-size: cover;
   height: 100vh;
 }

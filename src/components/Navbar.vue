@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="primary">
+  <b-navbar toggleable="lg" type="dark" variant="success">
     <b-navbar-brand :to="{ name: 'main' }">Superliga Vue</b-navbar-brand>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
@@ -22,7 +22,7 @@
           >League Menegment</b-nav-item
         > -->
 
-        <b-nav-item :to="{ name: 'search' }">About</b-nav-item>
+        <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
         <b-nav-text>Hello Guest!</b-nav-text>

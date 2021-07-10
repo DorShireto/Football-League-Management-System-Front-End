@@ -42,14 +42,10 @@
             ><u style="text-decoration: none">{{ activeTeam }}</u>
           </a>
           <br />
-          <!-- <b @click="moveToTeamPage(activeTeam)">Team:</b> {{ activeTeam }} -->
-          <!-- <br /> -->
+
           <b>Position:</b> {{ position }}
           <br />
         </b-card-text>
-        <!-- <b-button v-on:click="movetoPersonalPage" href="" variant="primary"
-          >Personal Page</b-button 
-         > -->
       </b-card>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div id="loginPage">
+  <div id="loginPage" class="d-flex flex-column align-items-center">
     <h1 class="title">Login</h1>
     <b-form @submit.prevent="onLogin">
       <b-form-group
@@ -37,7 +37,7 @@
 
       <b-button
         type="submit"
-        variant="primary"
+        variant="success"
         style="width: 100px; display: block"
         class="mx-auto w-100"
         >Login</b-button
@@ -128,6 +128,6 @@ export default {
 <style>
 #loginPage {
   max-width: 400px;
-  background: antiquewhite;
+  /* background: antiquewhite; */
 }
 </style>

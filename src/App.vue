@@ -63,7 +63,11 @@ export default {
 }
 
 #rv {
-  background: aqua;
+  /* background: aqua; */
+  background: url("../public/imgs/bg2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
   height: fit-content;
   min-height: 100vh;
 }

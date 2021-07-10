@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <H1>Current Stage Page</H1>
     <H2>Super League Season 2020/2021</H2>
     <br />

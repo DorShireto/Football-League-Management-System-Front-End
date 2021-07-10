@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>League Management Page</h1>
-    <b-button v-b-modal.modal-addMatch class="m-2" variant="primary"
+    <b-button v-b-modal.modal-addMatch class="m-2" variant="success"
       >Add New Match</b-button
     >
     <b-modal
@@ -14,7 +14,7 @@
       <template #modal-footer>
         <div class="w-100">
           <b-button
-            variant="primary"
+            variant="success"
             size="sm"
             class="float-left"
             @click="showModal = false"

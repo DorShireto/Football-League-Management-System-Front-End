@@ -147,8 +147,9 @@ const shared_data = {
   ],
   allPlayers: [],
   allTeams: [],
-
   role: localStorage.role,
+  playerSearchQuery: localStorage.playerSearchQuery,
+
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;
@@ -158,11 +159,14 @@ const shared_data = {
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
+    localStorage.removeItem("role");
     this.username = undefined;
+    this.role = undefined;
     router.push({ name: 'main' })
   },
   set_role(role_name) {
     this.role = role_name;
+    localStorage.setItem("role", this.role);
     console.log("finished and logged as " + this.role);
   }
 };

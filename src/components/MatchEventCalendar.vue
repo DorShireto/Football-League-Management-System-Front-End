@@ -34,7 +34,7 @@
       <template #modal-footer>
         <div class="w-100">
           <b-button
-            variant="primary"
+            variant="success"
             size="sm"
             class="float-left"
             @click="showModal = false"

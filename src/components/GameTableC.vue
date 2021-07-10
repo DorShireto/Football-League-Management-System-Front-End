@@ -9,6 +9,7 @@
       :busy="isBusy"
       show-empty
       :filter="filter"
+      :filter-included-fields="filterOn"
       responsive="sm"
       :selectable="selectable"
       :select-mode="selectMode"
@@ -47,7 +48,7 @@
           v-b-modal.modal-editScore
           size="sm"
           @click="handle_MEC_click(row)"
-          class="mr-2 primary"
+          class="mr-2 success"
         >
           Edit Score
         </b-button>
@@ -99,8 +100,8 @@
         </a>
       </template>
 
-      <template #table-busy>
-        <div class="text-center text-primary my-2">
+      <template v-if="showLoading" #table-busy>
+        <div class="text-center text-success my-2">
           <b-spinner class="align-middle"></b-spinner>
           <strong>Loading...</strong>
         </div>
@@ -129,7 +130,7 @@
       <template #modal-footer>
         <div class="w-100">
           <b-button
-            variant="primary"
+            variant="success"
             size="sm"
             class="float-left"
             @click="closeEditScoreModal"
@@ -151,11 +152,11 @@ export default {
       isBusy: true,
       selectMode: "single",
       matchData: {},
-      filters: {
-        // filets for columns filter, not working ATM
-        id: "",
-        position: "",
-      },
+      // filters: {
+      //   // filets for columns filter, not working ATM
+      //   id: "",
+      //   position: "",
+      // },
     };
   },
   components: {
@@ -163,6 +164,10 @@ export default {
     EditScoreForm,
   },
   props: {
+    filterOn: {
+      type: Array,
+      required: false,
+    },
     filter: {
       type: String,
       required: false,
@@ -184,6 +189,11 @@ export default {
       required: false,
     },
     showFilter: {
+      type: Boolean,
+      required: false,
+    },
+    showLoading: {
+      default: true,
       type: Boolean,
       required: false,
     },
@@ -245,27 +255,8 @@ export default {
   updated() {
     this.isBusy = false;
   },
-  computed: {
-    filtered() {
-      // filter by columns.. (not working atm)
-      const filtered = this.items.filter((item) => {
-        return Object.keys(this.filters).every((key) =>
-          String(item[key]).includes(this.filters[key])
-        );
-      });
-      return filtered.length > 0
-        ? filtered
-        : [
-            {
-              id: "",
-              position: "",
-            },
-          ];
-    },
-  },
-
   // mounted() {
-  //   $(this.$refs.mymodal).on("hidden.bs.modal", this.dor);
+  //   this.isBusy = showLoading;
   // },
 };
 </script>
