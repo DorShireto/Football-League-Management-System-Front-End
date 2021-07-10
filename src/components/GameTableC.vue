@@ -187,16 +187,19 @@ export default {
 
   methods: {
     updateMatchScore(score) {
-      console.log(this.matchData);
-      console.log(
-        "updating scores with home:" +
-          score.homeScore +
-          "     away:" +
-          score.awayScore
-      );
       this.matchData.homeScore = score.homeScore;
       this.matchData.awayScore = score.awayScore;
       //write update to DB
+      this.axios.put(
+        this.$root.store.server_domain +
+          this.$root.store.server_port +
+          "/league/updateMatchScore",
+        {
+          matchId: this.matchData.id,
+          homeTeamScore: score.homeScore,
+          awayTeamScore: score.awayScore,
+        }
+      );
 
       this.closeEditScoreModal();
     },
