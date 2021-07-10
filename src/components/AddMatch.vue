@@ -53,38 +53,45 @@
         </b-form-invalid-feedback> </b-form-group
       ><!-- stage name -->
 
+      <!-- HometeamName -->
       <b-form-group
         id="input-group-homeTeam"
         label-cols-sm="3"
         label="Home Team:"
         label-for="homeTeam"
       >
-        <b-form-input
+        <b-form-select
           id="homeTeam"
           v-model="$v.form.homeTeam.$model"
+          :options="teams"
           :state="validateState('homeTeam')"
-        ></b-form-input>
+          @change="handleHomeTeamSelection"
+        ></b-form-select>
         <b-form-invalid-feedback>
-          Home Team is required
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- homeTeam -->
+          Home Team Name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
 
+      <!-- AwayteamName -->
       <b-form-group
         id="input-group-awayTeam"
         label-cols-sm="3"
         label="Away Team:"
         label-for="awayTeam"
       >
-        <b-form-input
+        <b-form-select
           id="awayTeam"
           v-model="$v.form.awayTeam.$model"
+          :options="teams"
           :state="validateState('awayTeam')"
-        ></b-form-input>
+          @change="handleAwayTeamSelection"
+        ></b-form-select>
         <b-form-invalid-feedback>
-          Away Team is required
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- awayTeam -->
+          Away Team Name is required
+        </b-form-invalid-feedback>
+      </b-form-group>
 
+      <!-- stadium -->
       <b-form-group
         id="input-group-stadium"
         label-cols-sm="3"
@@ -96,68 +103,65 @@
           v-model="$v.form.stadium.$model"
           :state="validateState('stadium')"
         ></b-form-input>
-        <b-form-invalid-feedback>
-          stadium is required
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- stadium -->
-
+        <b-form-invalid-feedback> stadium is required </b-form-invalid-feedback>
+      </b-form-group>
+      <!-- refereeName -->
       <b-form-group
         id="input-group-refereeName"
         label-cols-sm="3"
         label="Referee Name:"
         label-for="refereeName"
       >
-        <b-form-input
+        <b-form-select
           id="refereeName"
           v-model="$v.form.refereeName.$model"
+          :options="mainReferees"
           :state="validateState('refereeName')"
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="!$v.form.refereeName.required">
-          Referee Name is required
+        ></b-form-select>
+        <b-form-invalid-feedback>
+          Main Referee Name is required
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-else-if="!$v.form.refereeName.alpha">
-          Referee Name should contain only letters!
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- refereeName -->
+      </b-form-group>
 
+      <!-- lineReferee1 -->
       <b-form-group
         id="input-group-lineReferee1"
         label-cols-sm="3"
         label="Line Referee 1 Name:"
         label-for="lineReferee1"
       >
-        <b-form-input
+        <b-form-select
           id="lineReferee1"
           v-model="$v.form.lineReferee1.$model"
+          :options="lineReferees"
           :state="validateState('lineReferee1')"
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="!$v.form.lineReferee1.required">
-          Referee Name is required
+          @change="handleReferee1Selection"
+        ></b-form-select>
+        <b-form-invalid-feedback>
+          Line Referee 1 Name is required
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-else-if="!$v.form.lineReferee1.alpha">
-          Referee Name should contain only letters!
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- lineReferee1 -->
+      </b-form-group>
 
+      <!-- lineReferee2 -->
       <b-form-group
         id="input-group-lineReferee2"
         label-cols-sm="3"
         label="Line Referee 2 Name:"
         label-for="lineReferee2"
       >
-        <b-form-input
+        <b-form-select
           id="lineReferee2"
           v-model="$v.form.lineReferee2.$model"
+          :options="lineReferees"
           :state="validateState('lineReferee2')"
-        ></b-form-input>
-        <b-form-invalid-feedback v-if="!$v.form.lineReferee2.required">
-          Referee Name is required
+          @change="handleReferee2Selection"
+        ></b-form-select>
+        <b-form-invalid-feedback>
+          Line Referee 2 Name is required
         </b-form-invalid-feedback>
-        <b-form-invalid-feedback v-else-if="!$v.form.lineReferee2.alpha">
-          Referee Name should contain only letters!
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- lineReferee2 -->
+      </b-form-group>
 
+      <!-- time -->
       <b-form-group
         id="input-group-time"
         label-cols-sm="3"
@@ -169,6 +173,7 @@
         </div>
       </b-form-group>
 
+      <!-- date -->
       <b-form-group
         id="input-group-date"
         label-cols-sm="3"
@@ -201,12 +206,19 @@
 </template>
 
 <script>
-import { required, alpha } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   name: "addMatch",
   data() {
     return {
+      teams: [],
+      mainReferees: [],
+      lineReferees: [],
+      disabledRef1Name: "",
+      disabledRef2Name: "",
+      disabledTeam1Name: "",
+      disabledTeam2Name: "",
       form: {
         leagueName: "SuperLiga",
         seasonName: "2020/2021",
@@ -250,20 +262,60 @@ export default {
       },
       refereeName: {
         required,
-        alpha,
       },
       lineReferee1: {
         required,
-        alpha,
       },
       lineReferee2: {
         required,
-        alpha,
       },
     },
   },
+  async mounted() {
+    console.log("addMatch mounted");
+    //update teams
+    const teamsNames = await this.axios.get(
+      this.$root.store.server_domain +
+        this.$root.store.server_port +
+        "/teams/names"
+    );
+    // console.log(teamsNames);
+    teamsNames.data.forEach((team) => {
+      this.teams.push({
+        text: team.teamName,
+        value: team.teamName,
+        disabled: false,
+      });
+    });
+    const mainReferees = await this.axios.get(
+      this.$root.store.server_domain +
+        this.$root.store.server_port +
+        "/league/mainReferees"
+    );
+    this.mainReferees = mainReferees.data;
 
+    const lineReferees = await this.axios.get(
+      this.$root.store.server_domain +
+        this.$root.store.server_port +
+        "/league/lineReferees"
+    );
+    lineReferees.data.forEach((lineRef) => {
+      const refereeObj = {
+        text: lineRef,
+        value: lineRef,
+        disabled: false,
+      };
+      this.lineReferees.push(refereeObj);
+    });
+  },
   methods: {
+    validate_teams() {
+      if (this.form.awayTeam != this.form.homeTeam) {
+        return true;
+      }
+      alert("Please choose different team names");
+      return false;
+    },
     validate_time() {
       if (this.time != "") {
         return true;
@@ -291,6 +343,72 @@ export default {
       const { $dirty, $error } = this.$v.form[param];
       return $dirty ? !$error : null;
     },
+    handleHomeTeamSelection(e) {
+      //enable last disabled option from referee1 list:
+      let alreadyDisabledTeam1 = this.teams.find(
+        (team) => team.value == this.disabledTeam1Name
+      );
+      if (alreadyDisabledTeam1) {
+        alreadyDisabledTeam1.disabled = false;
+      }
+
+      const teamName = e;
+      //get already disabled option if exist one and enable it
+
+      let option = this.teams.find((team) => team.value == teamName);
+      option.disabled = true;
+      this.disabledTeam1Name = teamName;
+    },
+    handleAwayTeamSelection(e) {
+      //enable last disabled option from referee1 list:
+      let alreadyDisabledTeam2 = this.teams.find(
+        (team) => team.value == this.disabledTeam2Name
+      );
+      if (alreadyDisabledTeam2) {
+        alreadyDisabledTeam2.disabled = false;
+      }
+
+      const teamName = e;
+      //get already disabled option if exist one and enable it
+
+      let option = this.teams.find((team) => team.value == teamName);
+      option.disabled = true;
+      this.disabledTeam2Name = teamName;
+    },
+    handleReferee1Selection(e) {
+      //enable last disabled option from referee1 list:
+      let alreadyDisabledRef1 = this.lineReferees.find(
+        (ref) => ref.value == this.disabledRef1Name
+      );
+      if (alreadyDisabledRef1) {
+        alreadyDisabledRef1.disabled = false;
+      }
+
+      const refereeName = e;
+      //get already disabled option if exist one and enable it
+
+      let option = this.lineReferees.find((ref) => ref.value == refereeName);
+      option.disabled = true;
+      this.disabledRef1Name = refereeName;
+    },
+
+    handleReferee2Selection(e) {
+      //enable last disabled option from referee1 list:
+      let alreadyDisabledRef2 = this.lineReferees.find(
+        (ref) => ref.value == this.disabledRef2Name
+      );
+      if (alreadyDisabledRef2) {
+        alreadyDisabledRef2.disabled = false;
+      }
+
+      const refereeName = e;
+      //get already disabled option if exist one and enable it
+
+      let option = this.lineReferees.find((ref) => ref.value == refereeName);
+      option.disabled = true;
+      this.disabledRef2Name = refereeName;
+    },
+
     async AddMatch() {
       //send match details to BE
       try {
@@ -322,6 +440,7 @@ export default {
     },
     async onAddMatch() {
       console.log("add match method called");
+      if (!this.validate_teams()) return;
       if (!this.validate_time()) return;
       if (!this.validate_date()) return;
       this.$v.form.$touch();

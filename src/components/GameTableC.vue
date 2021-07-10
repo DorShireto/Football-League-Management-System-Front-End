@@ -42,6 +42,17 @@
         </a>
       </template>
 
+      <template #cell(editScore)="row">
+        <b-button
+          v-b-modal.modal-editScore
+          size="sm"
+          @click="handle_MEC_click(row)"
+          class="mr-2 primary"
+        >
+          Edit Score
+        </b-button>
+      </template>
+
       <!-- team name click -->
       <template #cell(homeTeam)="row">
         <a @click="moveToTeamPage(row.item.homeTeam)" style="cursor: pointer"
@@ -95,18 +106,41 @@
       id="modal-mec"
       title="Match Event Calendar"
       scrollable
-      @hide="closeModal"
+      @hide="closeMecModal"
     >
       <MatchEventCalendar
         :matchData="matchData"
         :showAddEventBtn="showAddEventBtn"
       ></MatchEventCalendar>
     </b-modal>
+    <b-modal
+      id="modal-editScore"
+      title="Edit Match Score"
+      scrollable
+      @hide="closeEditScoreModal"
+    >
+      <EditScoreForm
+        v-on:closeEditScoreModalEvent="updateMatchScore"
+      ></EditScoreForm>
+      <template #modal-footer>
+        <div class="w-100">
+          <b-button
+            variant="primary"
+            size="sm"
+            class="float-left"
+            @click="closeEditScoreModal"
+          >
+            Close
+          </b-button>
+        </div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import MatchEventCalendar from "./MatchEventCalendar.vue";
+import EditScoreForm from "./EditScoreForm.vue";
 export default {
   data() {
     return {
@@ -122,6 +156,7 @@ export default {
   },
   components: {
     MatchEventCalendar,
+    EditScoreForm,
   },
   props: {
     filter: {
@@ -151,16 +186,34 @@ export default {
   },
 
   methods: {
+    updateMatchScore(score) {
+      console.log(this.matchData);
+      console.log(
+        "updating scores with home:" +
+          score.homeScore +
+          "     away:" +
+          score.awayScore
+      );
+      this.matchData.homeScore = score.homeScore;
+      this.matchData.awayScore = score.awayScore;
+      //write update to DB
+
+      this.closeEditScoreModal();
+    },
+
     handle_MEC_click(item) {
       this.matchData = item.item;
       // this.$bvModal.show("modal-mec");
     },
-    closeModal() {
+    closeMecModal() {
       this.$bvModal.hide("modal-mec");
     },
     movetoPersonalPage(playerId) {
       console.log(playerId);
       this.$router.push({ name: "playerpage", params: { playerId: playerId } });
+    },
+    closeEditScoreModal() {
+      this.$bvModal.hide("modal-editScore");
     },
     async moveToTeamPage(teamName) {
       console.log(teamName);
@@ -181,6 +234,7 @@ export default {
       if (currentRoute == "teampage") this.$router.go(); //refresh page
     },
   },
+
   updated() {
     this.isBusy = false;
   },

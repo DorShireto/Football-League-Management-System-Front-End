@@ -1,30 +1,36 @@
 <template>
   <div>
     <div class="player-preview">
-      <b-card id="playerCard" tag="article" style="max-width: 25rem" class="">
-        <img v-bind:src="profilePicURL" @click="movetoPersonalPage" />
-        <span class="ml-3">
-          <b-spinner
-            v-show="!this.favorite_loaded"
-            variant="info"
-            type="grow"
-            font-scale="2"
-          ></b-spinner>
-          <b-icon
-            v-show="!this.favorite && this.favorite_loaded"
-            icon="heart"
-            font-scale="2"
-            @click="favoriteHandler"
-          ></b-icon>
-          <b-icon
-            v-show="this.favorite && this.favorite_loaded"
-            icon="heart-fill"
-            variant="danger"
-            font-scale="2"
-            @click="favoriteHandler"
-          ></b-icon>
-        </span>
-        <b-card-title style="cursor: pointer"
+      <b-card id="playerCard" tag="article">
+        <div class="row">
+          <img
+            v-bind:src="profilePicURL"
+            @click="movetoPersonalPage"
+            class="center mb-3 mr-3"
+          />
+          <span class="mr-3">
+            <b-spinner
+              v-show="!this.favorite_loaded"
+              variant="info"
+              type="grow"
+              font-scale="2"
+            ></b-spinner>
+            <b-icon
+              v-show="!this.favorite && this.favorite_loaded"
+              icon="heart"
+              font-scale="2"
+              @click="favoriteHandler"
+            ></b-icon>
+            <b-icon
+              v-show="this.favorite && this.favorite_loaded"
+              icon="heart-fill"
+              variant="danger"
+              font-scale="2"
+              @click="favoriteHandler"
+            ></b-icon>
+          </span>
+        </div>
+        <b-card-title
           ><u @click="movetoPersonalPage">{{ fullName }}</u>
         </b-card-title>
         <b-card-text>
@@ -158,10 +164,14 @@ export default {
 </script>
 
 <style>
+#playerCard {
+  text-align: center;
+}
 .player-preview {
   display: inline-block;
-  width: 250px;
-  height: fit-content;
+  /* min-width: 300px; */
+  width: 280px;
+  height: 300px;
   position: relative;
   margin: 10px 10px;
   border-style: solid;
@@ -179,5 +189,17 @@ export default {
 .player-preview .player-content {
   width: 100%;
   overflow: hidden;
+}
+.card-body {
+  height: 288px;
+}
+.card-body {
+  align-items: center;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 </style>
