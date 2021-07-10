@@ -57,6 +57,12 @@ export default {
           teamName +
           "/id"
       );
+      let currentRoute = this.$route.name;
+      this.$router.push({
+        name: "teampage",
+        params: { teamId: res.data.teamId },
+      });
+      if (currentRoute == "teampage") this.$router.go(); //refresh page
     },
   },
 

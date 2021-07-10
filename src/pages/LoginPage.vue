@@ -108,7 +108,7 @@ export default {
       } catch (err) {
         console.log(err.response);
         // this.form.submitError = err.response.data.message;
-        this.form.submitError = err;
+        this.form.submitError = "Your login information was incorrect.";
       }
     },
     onLogin() {

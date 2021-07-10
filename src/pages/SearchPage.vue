@@ -11,6 +11,7 @@
       :filter="searchPlayerQuery"
       :items="this.playersData"
       :fields="this.playersTableFields"
+      :showFilter="true"
     ></GamesTableC>
     <br /><br />
     <b-button disabled style="opacity: 100%; width: 100%" variant="primary"
@@ -23,6 +24,7 @@
       :filter="searchTeamQuery"
       :items="this.teamsData"
       :fields="this.teamsTableFields"
+      :showFilter="true"
     ></GamesTableC>
   </div>
 </template>
@@ -40,11 +42,12 @@ export default {
         { key: "id" },
         { key: "fullname", sortable: true },
         { key: "activeTeam", sortable: true },
+        { key: "profilePicture" },
         { key: "position", sortable: true },
       ],
       teamsTableFields: [
         { key: "name", sortable: true },
-        { key: "logoURL", sortable: true },
+        { key: "logoPicture" },
       ],
     };
   },

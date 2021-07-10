@@ -30,10 +30,18 @@ export default {
       for (let index = 0; index < allData.length; index++) {
         const team = allData[index];
         let { name, logoURL } = team;
-        this.$root.store.allTeams.push({ name: name, logoURL: logoURL });
+        this.$root.store.allTeams.push({ name: name, logoPicture: logoURL });
         //for loop over all players in team, push to this.$root.store.allPlayers
         for (let i = 0; i < team.players.length; i++) {
-          let player = team.players[i];
+          let playerTmp = team.players[i];
+          let player = {
+            fullname: playerTmp.fullname,
+            profilePicture: playerTmp.profilePicURL,
+            position: playerTmp.position,
+            activeTeam: playerTmp.activeTeam,
+            id: playerTmp.id,
+          };
+          // player.push(urlObj);
           this.$root.store.allPlayers.push(player);
         }
       }

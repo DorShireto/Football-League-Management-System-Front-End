@@ -159,6 +159,9 @@
         ></b-form-input></b-form-group
       >profile picture -->
 
+      <input type="file" name="file" id="file" accept=".jpg, .png, .jpeg" />
+      <p id="url"></p>
+
       <b-form-group
         id="input-group-role"
         label-cols-sm="3"
@@ -228,7 +231,7 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
-        // profilePic: "",
+        profilePic: "",
         role: null,
         submitError: undefined,
       },
@@ -302,7 +305,7 @@ export default {
             country: this.form.country,
             password: this.form.password,
             email: this.form.email,
-            profilePic: "",
+            // profilePic: "",
             // profilePic: this.form.profilePic,
             role: this.form.role.toLowerCase(),
           }
@@ -316,8 +319,9 @@ export default {
         this.form.submitError = err.response.data;
       }
     },
-    onRegister() {
+    async onRegister() {
       // console.log("register method called");
+      // await this.uploadProfilePic();
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
@@ -341,6 +345,30 @@ export default {
         this.$v.$reset();
       });
     },
+    // async uploadProfilePic() {
+    //   const file = document.getElementById("file");
+    //   // const img = document.getElementById("img")
+    //   // const url = document.getElementById("url")
+    //   file.addEventListener("change", (ev) => {
+    //     const formdata = new FormData();
+    //     formdata.append("image", ev.target.files[0]);
+    //     fetch("https://api.imgur.com/3/image/", {
+    //       method: "post",
+    //       headers: {
+    //         Authorization: "Client-ID 193ee7d7a22109e",
+    //       },
+    //       body: formdata,
+    //     })
+    //       .then((data) => data.json())
+    //       .then((data) => {
+    //         debugger;
+    //         alert(data);
+    //         // console.log(data);
+    //         // img.src = data.data.link
+    //         // url.innerText = data.data.link
+    //       });
+    //   });
+    // },
   },
 };
 </script>

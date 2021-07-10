@@ -141,6 +141,14 @@ export default {
           teamName +
           "/id"
       );
+      // console.log(res);
+      //save the current route
+      let currentRoute = this.$route.name;
+      this.$router.push({
+        name: "teampage",
+        params: { teamId: res.data.teamId },
+      });
+      if (currentRoute == "teampage") this.$router.go(); //refresh page
     },
   },
   created() {

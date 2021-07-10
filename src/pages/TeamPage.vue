@@ -48,7 +48,7 @@ export default {
       prevMatches: [],
       players: [],
       name: "",
-      logoURL: "",
+      logoPicture: "",
     };
   },
   methods: {
