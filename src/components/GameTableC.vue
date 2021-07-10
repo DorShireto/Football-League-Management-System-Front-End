@@ -28,20 +28,24 @@
       </template>
 
       <template #cell(homeTeam)="row">
-        <a @click="moveToTeamPage(row.item.homeTeam)" style="color: blue"
+        <a
+          @click="moveToTeamPage(row.item.homeTeam)"
+          style="color: blue; cursor: pointer"
           ><u>{{ row.item.homeTeam }}</u></a
         >
       </template>
 
       <template #cell(awayTeam)="row">
-        <a @click="moveToTeamPage(row.item.awayTeam)" style="color: blue"
+        <a
+          @click="moveToTeamPage(row.item.awayTeam)"
+          style="color: blue; cursor: pointer"
           ><u>{{ row.item.awayTeam }}</u></a
         >
       </template>
 
       <template #cell(activeTeam)="row">
         <a @click="moveToTeamPage(row.item.activeTeam)" style="color: blue"
-          >{{ <u> row.item.activeTeam }}</u></a
+          ><u>{{ row.item.activeTeam }}</u></a
         >
       </template>
 

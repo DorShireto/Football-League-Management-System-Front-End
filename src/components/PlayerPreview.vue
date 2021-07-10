@@ -34,8 +34,13 @@
           ><u @click="movetoPersonalPage">{{ fullName }}</u>
         </b-card-title>
         <b-card-text>
-          <b>Team:</b> {{ activeTeam }}
+          <b>Team: </b>
+          <a @click="moveToTeamPage(activeTeam)" style="cursor: pointer"
+            ><u style="text-decoration: none">{{ activeTeam }}</u>
+          </a>
           <br />
+          <!-- <b @click="moveToTeamPage(activeTeam)">Team:</b> {{ activeTeam }} -->
+          <!-- <br /> -->
           <b>Position:</b> {{ position }}
           <br />
         </b-card-text>
@@ -132,6 +137,16 @@ export default {
         this.favorite_loaded = true;
         console.log(error);
       }
+    },
+    async moveToTeamPage(teamName) {
+      console.log(teamName);
+      let res = await this.axios.get(
+        this.$root.store.server_domain +
+          this.$root.store.server_port +
+          "/teams/" +
+          teamName +
+          "/id"
+      );
     },
   },
   created() {
