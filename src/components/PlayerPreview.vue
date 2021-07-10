@@ -4,6 +4,7 @@
       <b-card id="playerCard" tag="article">
         <div class="row">
           <img
+            style="cursor: pointer"
             v-bind:src="profilePicURL"
             @click="movetoPersonalPage"
             class="center mb-3 mr-3"
@@ -31,7 +32,9 @@
           </span>
         </div>
         <b-card-title
-          ><u @click="movetoPersonalPage">{{ fullName }}</u>
+          ><u @click="movetoPersonalPage" style="cursor: pointer">{{
+            fullName
+          }}</u>
         </b-card-title>
         <b-card-text>
           <b>Team: </b>
