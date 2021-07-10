@@ -2,8 +2,7 @@
   <div id="mainPage">
     <div class="">
       <h1 class="title text-center">Main Page</h1>
-      <button v-on:click="loadTeamPage">Team Page</button>
-      <div class="row">
+      <div class="row d-flex align-items-center" style="margin-top: 20vh">
         <div class="col"><LeagueInfo></LeagueInfo></div>
         <div class="col-6">
           <LoginPage
@@ -21,22 +20,11 @@
 import LeagueInfo from "../components/LeagueInfo";
 import FavoriteGames from "../components/FavoriteGames";
 import LoginPage from "../pages/LoginPage";
-import PlayerPreview from "../components/PlayerPreview";
 export default {
   components: {
     LeagueInfo,
     LoginPage,
     FavoriteGames,
-    // PlayerPreview,
-  },
-  methods: {
-    loadTeamPage: function () {
-      // debugger;
-      // alert("Moving to team page id 939 - Midtjylland");
-      // this.$router.push({ name: "teampage", params: { teamId: this.id } });
-
-      this.$router.push("/teams/page/939");
-    },
   },
 };
 </script>

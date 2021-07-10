@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h5>Match Date: {{ matchData.date }}</h5>
+    <h5>Match Time: {{ matchData.time }}</h5>
     <h5 v-if="!matchEventCalendar.length">
       Currently there are no events to display
     </h5>

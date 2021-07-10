@@ -96,7 +96,7 @@ export default {
     async favoriteHandler() {
       if (this.favorite) {
         //remove from db
-        const response = await this.axios.delete(
+        const response = this.axios.delete(
           this.$root.store.server_domain +
             this.$root.store.server_port +
             "/users/removePlayer/" +
@@ -106,7 +106,7 @@ export default {
         console.log(this.id + " player removed from favorites");
       } else {
         // add to favorite
-        const response = await this.axios.post(
+        const response = this.axios.post(
           this.$root.store.server_domain +
             this.$root.store.server_port +
             "/users/addPlayer",

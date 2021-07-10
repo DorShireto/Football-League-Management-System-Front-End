@@ -89,9 +89,13 @@
       </template>
 
       <!-- player logo click -->
-      <template #cell(profilePicture)="row">
+      <template class="text-center" #cell(profilePicture)="row">
         <a @click="movetoPersonalPage(row.item.id)" style="cursor: pointer">
-          <img v-bind:src="row.item.profilePicture" style="width: 50px" />
+          <img
+            class="rounded mx-auto d-block"
+            v-bind:src="row.item.profilePicture"
+            style="width: 50px"
+          />
         </a>
       </template>
 

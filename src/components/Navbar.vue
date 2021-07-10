@@ -6,7 +6,6 @@
         <b-nav-item :to="{ name: 'main' }">Home</b-nav-item>
         <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
         <b-nav-item href="#/currentstage">Current Stage</b-nav-item>
-        <b-nav-item :to="{ name: 'tests' }">tests_page</b-nav-item>
         <b-nav-item
           text="Favorite Matches"
           v-if="$root.store.username"

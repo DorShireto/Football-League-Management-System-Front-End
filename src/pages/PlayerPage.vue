@@ -5,7 +5,33 @@
       <b-spinner></b-spinner>
     </div>
     <div v-show="!loading">
-      <h1>{{ previewName }} Personal Page</h1>
+      <h1>
+        <b>{{ previewName }}</b>
+      </h1>
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="mr-3">Personal Page</h2>
+        <span class="mr-3">
+          <b-spinner
+            v-show="!this.favorite_loaded"
+            variant="info"
+            type="grow"
+            font-scale="2"
+          ></b-spinner>
+          <b-icon
+            v-show="!this.favorite && this.favorite_loaded"
+            icon="heart"
+            font-scale="2"
+            @click="favoriteHandler"
+          ></b-icon>
+          <b-icon
+            v-show="this.favorite && this.favorite_loaded"
+            icon="heart-fill"
+            variant="danger"
+            font-scale="2"
+            @click="favoriteHandler"
+          ></b-icon>
+        </span>
+      </div>
       <img v-bind:src="profilePicURL" style="width: 300px" />
       <div>
         <br />
@@ -13,8 +39,6 @@
         <a @click="moveToTeamPage(previewActiveTeam)" style="cursor: pointer"
           ><u style="text-decoration: none">{{ previewActiveTeam }}</u>
         </a>
-
-        <!-- {{ previewActiveTeam }} -->
         <br />
         Position: {{ previewPosition }}<br />
         Common Name: {{ commonName }}<br />
@@ -34,6 +58,8 @@ export default {
   components: {},
   data() {
     return {
+      favorite: false,
+      favorite_loaded: false,
       loading: "true",
       previewName: "",
       previewActiveTeam: "",
@@ -45,6 +71,7 @@ export default {
       height: "",
       weight: "",
       profilePicURL: "",
+      id: "",
     };
   },
   methods: {
@@ -64,24 +91,76 @@ export default {
       });
       if (currentRoute == "teampage") this.$router.go(); //refresh page
     },
+
+    //favorite handle
+    async favoriteHandler() {
+      if (this.favorite) {
+        //remove from db
+        const response = this.axios.delete(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/removePlayer/" +
+            this.id
+        );
+        this.favorite = false;
+        console.log(this.id + " player removed from favorites");
+      } else {
+        // add to favorite
+        const response = this.axios.post(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/addPlayer",
+          {
+            playerId: this.id,
+          }
+        );
+        this.favorite = true;
+        console.log(this.id + " player added to favorites");
+      }
+    },
+    async isPlayerFavorite(playerId) {
+      // read data from server and try to find this player name in data returns.
+      // update "favorite" attribute
+      try {
+        const response = await this.axios.get(
+          this.$root.store.server_domain +
+            this.$root.store.server_port +
+            "/users/checkIfPlayerFavorite/" +
+            playerId
+        );
+        console.log("response from /users/checkIfPlayerFavorite/");
+        console.log(response);
+        // let status = response.status;
+        if (response.data == true) {
+          //player fav
+          this.favorite = true;
+        }
+        this.favorite_loaded = true;
+      } catch (error) {
+        this.favorite_loaded = true;
+        console.log(error);
+      }
+    },
   },
 
   async mounted() {
     // alert(this.$route.params.playerId);
+    this.id = this.$route.params.playerId;
     console.log("player page mounted");
-    console.log(
-      "sending req" +
-        this.$root.store.server_domain +
-        this.$root.store.server_port +
-        "/players/fullDetails/" +
-        this.$route.params.playerId
-    );
+    this.isPlayerFavorite(this.id);
+    // console.log(
+    //   "sending req" +
+    //     this.$root.store.server_domain +
+    //     this.$root.store.server_port +
+    //     "/players/fullDetails/" +
+    //     this.id
+    // );
 
     const response = await this.axios.get(
       this.$root.store.server_domain +
         this.$root.store.server_port +
         "/players/fullDetails/" +
-        this.$route.params.playerId
+        this.id
     );
     console.log("sent req");
 

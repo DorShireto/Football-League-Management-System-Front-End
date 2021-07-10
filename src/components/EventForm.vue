@@ -118,7 +118,7 @@ export default {
         "Red Card",
         "Yellow Card",
         "Injury",
-        "Submission",
+        "Substitution",
       ],
       teamNames: [],
       form: {
