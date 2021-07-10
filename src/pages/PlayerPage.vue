@@ -9,7 +9,13 @@
       <img v-bind:src="profilePicURL" style="width: 300px" />
       <div>
         <br />
-        Active Team: {{ previewActiveTeam }}<br />
+        Active Team:
+        <a @click="moveToTeamPage(previewActiveTeam)" style="cursor: pointer"
+          ><u style="text-decoration: none">{{ previewActiveTeam }}</u>
+        </a>
+
+        <!-- {{ previewActiveTeam }} -->
+        <br />
         Position: {{ previewPosition }}<br />
         Common Name: {{ commonName }}<br />
         Nationality: {{ nationality }}<br />
@@ -40,6 +46,18 @@ export default {
       weight: "",
       profilePicURL: "",
     };
+  },
+  methods: {
+    async moveToTeamPage(teamName) {
+      console.log(teamName);
+      let res = await this.axios.get(
+        this.$root.store.server_domain +
+          this.$root.store.server_port +
+          "/teams/" +
+          teamName +
+          "/id"
+      );
+    },
   },
 
   async mounted() {
