@@ -60,7 +60,7 @@ export default {
       futureMatches: [],
       prevMatches: [],
       futureTableField: this.$root.store.future_match_headers,
-      prevTableField: this.$root.store.matchHeaders_With_mec,
+      prevTableField: this.$root.store.matchHeaders_With_mec_score,
       league_matches_headers: this.$root.store.matchHeaders_With_mec,
       showModal: false,
     };

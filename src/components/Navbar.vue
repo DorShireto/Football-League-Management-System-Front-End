@@ -14,14 +14,14 @@
           >Favorite Matches</b-nav-item
         >
 
-        <!-- <b-nav-item
+        <b-nav-item
           :to="{ name: 'leaguemanagement' }"
           v-if="$root.store.role == 'asso_member'"
           >League Menegment</b-nav-item
-        > -->
-        <b-nav-item :to="{ name: 'leaguemanagement' }"
-          >League Menegment</b-nav-item
         >
+        <!-- <b-nav-item :to="{ name: 'leaguemanagement' }"
+          >League Menegment</b-nav-item
+        > -->
 
         <b-nav-item :to="{ name: 'search' }">About</b-nav-item>
       </b-navbar-nav>

@@ -111,6 +111,25 @@ const shared_data = {
     { key: "stadium" },
     { key: "matchEventCalendar" }
   ],
+  matchHeaders_With_mec_score: [
+    { key: "id" },
+    { key: "leagueName" },
+    { key: "seasonName" },
+    { key: "stageName" },
+    { key: "homeTeam", sortable: true },
+    { key: "awayTeam", sortable: true },
+    { key: "homeScore" },
+    { key: "awayScore" },
+    { key: "refereeName" },
+    { key: "lineReferee1" },
+    { key: "lineReferee2" },
+    { key: "date", sortable: true },
+    { key: "time" },
+    { key: "stadium" },
+    { key: "matchEventCalendar" },
+    { key: "editScore" }
+
+  ],
   future_match_headers: [
     { key: "id" },
     { key: "leagueName" },

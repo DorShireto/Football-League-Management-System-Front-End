@@ -159,23 +159,6 @@
         ></b-form-input></b-form-group
       >profile picture -->
 
-      <b-form-group
-        id="input-group-role"
-        label-cols-sm="3"
-        label="Role:"
-        label-for="role"
-      >
-        <b-form-select
-          id="role"
-          v-model="$v.form.role.$model"
-          :options="roles"
-          :state="validateState('role')"
-        ></b-form-select>
-        <b-form-invalid-feedback>
-          Role is required
-        </b-form-invalid-feedback> </b-form-group
-      ><!-- role -->
-
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -229,11 +212,10 @@ export default {
         confirmedPassword: "",
         email: "",
         // profilePic: "",
-        role: null,
         submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
-      roles: [{ value: null, text: "", disabled: true }],
+      // roles: [{ value: null, text: "", disabled: true }],
       errors: [],
       validated: false,
     };
@@ -268,15 +250,15 @@ export default {
         required,
         email,
       },
-      role: {
-        required,
-      },
+      // role: {
+      //   required,
+      // },
     },
   },
   mounted() {
     // console.log("mounted");
     this.countries.push(...countries);
-    this.roles.push("Fan", "Association Member", "Manager", "Player", "Coach");
+    // this.roles.push("Fan", "Association Member", "Manager", "Player", "Coach");
     // console.log($v);
   },
   methods: {
@@ -288,8 +270,8 @@ export default {
       // alert(this.$store.state.server_domain);
 
       try {
-        if (this.form.role == "Association Member")
-          this.form.role = "asso_member";
+        // if (this.form.role == "Association Member")
+        //   this.form.role = "asso_member";
         const response = await this.axios.post(
           // $root.store.server_domain + $root.store.server_port + "/Register",
           this.$root.store.server_domain +
@@ -304,7 +286,7 @@ export default {
             email: this.form.email,
             profilePic: "",
             // profilePic: this.form.profilePic,
-            role: this.form.role.toLowerCase(),
+            role: "fan",
           }
         );
         this.$router.push({ name: "login" });
@@ -335,7 +317,7 @@ export default {
         confirmedPassword: "",
         email: "",
         profilePic: "",
-        role: null,
+        // role: null,
       };
       this.$nextTick(() => {
         this.$v.$reset();
